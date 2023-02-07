@@ -9,7 +9,8 @@ Preset:
   m_Name: Default
   m_TargetType:
     m_NativeTypeID: 114
-    m_ManagedTypePPtr: {fileID: 11500000, guid: eb7cf53b7c3b36a4b9f4d2b688942503, type: 3}
+    m_ManagedTypePPtr: {fileID: 11500000, guid: eb7cf53b7c3b36a4b9f4d2b688942503,
+      type: 3}
     m_ManagedTypeFallback: 
   m_Properties:
   - target: {fileID: 0}
@@ -37,12 +38,16 @@ Preset:
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: changeRootFolder
+    propertyPath: optimizeUpdating
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: changeRootFolder
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: rootFolder
-    value: SM_AssetPacks/Modern UI Pack/Prefabs
+    value: Modern UI Pack/Prefabs/
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: animatedIconColor.r
@@ -960,4 +965,3 @@ Preset:
     propertyPath: tooltipBackgroundColor.a
     value: 1
     objectReference: {fileID: 0}
-  m_ExcludedProperties: []
