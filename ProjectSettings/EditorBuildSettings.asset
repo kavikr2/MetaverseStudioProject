@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/SM_Temp/Temp_Scene/LoginMockup.unity
+    guid: 9c6ac7df96437c54c9c41bde07531ff6
+  - enabled: 1
+    path: Assets/SM_Scenes/SM_Main_Scene.unity
+    guid: 13144ce150fade943b009b48c04b51ce
   m_configObjects: {}
