@@ -17,7 +17,7 @@ public class SM_PlayerMovement : MonoBehaviour
     void Update()
     {
         //Animations
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||  Input.GetKey(KeyCode.D))
         {
             animator.SetBool("isWalking", true);
         }
@@ -36,13 +36,21 @@ public class SM_PlayerMovement : MonoBehaviour
 
         }
 
+        if (Input.GetKey(KeyCode.Z))
+        {
+            animator.SetBool("isFormalBow", true);
+        }
+        else
+        {
+            animator.SetBool("isFormalBow", false);
+        }
+
 
         //Movement 
         if (speed > 0) { speed -= 0.1f; }
         if (speed < 0) { speed += 0.1f; }
         if (Input.GetKey(KeyCode.W) && speed < 4) 
         {
-            animator.SetBool("isWalking", true);
             speed += 0.5f; 
         }
         if (Input.GetKey(KeyCode.S) && speed < -2) { speed -= 0.5f; }
