@@ -141,7 +141,7 @@ public class SM_ServerManager : MonoBehaviour
 
     public void SceneChanger()
     {
-        SceneManager.LoadScene("SM_Main_Scene");
+        SceneManager.LoadScene("SM_MetaverseScene");
     }
 
 }
