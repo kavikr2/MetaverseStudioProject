@@ -6,6 +6,10 @@ using UnityEngine.Networking;
 using TMPro;
 using Michsky.UI.ModernUIPack;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
+using Photon.Pun.Demo.Asteroids;
+using Photon.Pun;
+using UnityEngine.UI;
 
 public class SM_ServerManager : MonoBehaviour
 {
@@ -26,8 +30,11 @@ public class SM_ServerManager : MonoBehaviour
     #endregion
 
     [Header("Login Page")]
-    public TMP_InputField LoginUser;
-    public TMP_InputField LoginPass;
+    public TMP_InputField loginUser;
+    public TMP_InputField loginPass;
+    public TMP_InputField nicknameField;
+    public Button nicknameButton;
+    public Button playButton;
 
     [Header("Register Page")]
     public TMP_InputField RegUser;
@@ -38,9 +45,36 @@ public class SM_ServerManager : MonoBehaviour
     public ModalWindowManager LoggedScreen;
     public NotificationManager SuccessNotify;
     public NotificationManager FailureNotify;
+    public NotificationManager UsernameNotify;
+
+    public GameObject RoomListContent;
+    public GameObject RoomListEntryPrefab;
+
+    private Dictionary<string, RoomInfo> cachedRoomList;
+    private Dictionary<string, GameObject> roomListEntries;
+    private Dictionary<int, GameObject> playerListEntries;
 
     AccountTable Accounts;
     string AccountsURL = "https://drive.google.com/uc?export=download&id=10YFKvBGL4OWGMTzXH2YfdV-c5xpPWK_E";
+
+    public void Start()
+    {
+        SetNickname();
+
+        if (PhotonNetwork.InRoom)
+        {
+            // Get an array of all the Photon players in the room.
+            Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
+
+            // Loop through the array of players and print each player's nickname.
+            for (int i = 0; i < players.Length; i++)
+            {
+                Debug.Log(players[i].NickName);
+            }
+        }
+    }
+
+    #region GDrive Tools
 
     // Download image file
     void GetTexture(string url)
@@ -115,6 +149,8 @@ public class SM_ServerManager : MonoBehaviour
         }
     }
 
+    #endregion
+
     IEnumerator LoginCheck()
     {
         UnityWebRequest request = UnityWebRequest.Get(AccountsURL);
@@ -128,10 +164,11 @@ public class SM_ServerManager : MonoBehaviour
         {
             Accounts = JsonUtility.FromJson<AccountTable>(request.downloadHandler.text);
             
-            if(LoginUser.text == Accounts.Name && LoginPass.text == Accounts.Password)
+            if(loginUser.text == Accounts.Name && loginPass.text == Accounts.Password)
             {
                 SuccessNotify.OpenNotification();
 
+                GameManager.Instance.SetName(Accounts.Name);
                 LoggedScreen.titleText = "Hello "+Accounts.Name;
                 LoggedScreen.OpenWindow();
             } 
@@ -139,11 +176,106 @@ public class SM_ServerManager : MonoBehaviour
         }
     }
 
-    public void SceneChanger()
+    public void SetNickname()
     {
-        SceneManager.LoadScene("SM_MetaverseScene");
+        nicknameButton.interactable = false;
+        playButton.interactable = false;
+
+        nicknameField.onValueChanged.AddListener(delegate
+        {
+            nicknameButton.interactable = !string.IsNullOrEmpty(nicknameField.text);
+
+        });
+
+        nicknameField.onValueChanged.AddListener(delegate
+        {
+            playButton.interactable = !string.IsNullOrEmpty(nicknameField.text);
+        });
     }
 
+    void setNickName()
+    {
+        GameManager.Instance.SetName(nicknameField.text);
+    }
+
+    public void SceneChanger()
+    {
+        GameManager.Instance.SceneChanger(1);
+    }
+
+    private bool CheckPlayersReady()
+    {
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            return false;
+        }
+
+        foreach (Player p in PhotonNetwork.PlayerList)
+        {
+            object isPlayerReady;
+            if (p.CustomProperties.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
+            {
+                if (!(bool)isPlayerReady)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void ClearRoomListView()
+    {
+        foreach (GameObject entry in roomListEntries.Values)
+        {
+            Destroy(entry.gameObject);
+        }
+
+        roomListEntries.Clear();
+    }
+
+    private void UpdateCachedRoomList(List<RoomInfo> roomList)
+    {
+        foreach (RoomInfo info in roomList)
+        {
+            if (!info.IsOpen || !info.IsVisible || info.RemovedFromList)
+            {
+                if (cachedRoomList.ContainsKey(info.Name))
+                {
+                    cachedRoomList.Remove(info.Name);
+                }
+
+                continue;
+            }
+
+            if (cachedRoomList.ContainsKey(info.Name))
+            {
+                cachedRoomList[info.Name] = info;
+            }
+            else
+            {
+                cachedRoomList.Add(info.Name, info);
+            }
+        }
+    }
+
+    private void UpdateRoomListView()
+    {
+        foreach (RoomInfo info in cachedRoomList.Values)
+        {
+            GameObject entry = Instantiate(RoomListEntryPrefab);
+            entry.transform.SetParent(RoomListContent.transform);
+            entry.transform.localScale = Vector3.one;
+            entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, info.MaxPlayers);
+
+            roomListEntries.Add(info.Name, entry);
+        }
+    }
 }
 
 public struct AccountTable
@@ -152,3 +284,4 @@ public struct AccountTable
     public string Email;
     public string Password;
 }
+
