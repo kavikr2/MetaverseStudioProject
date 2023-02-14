@@ -179,7 +179,7 @@ public class SM_ServerManager : MonoBehaviour
     public void SetNickname()
     {
         nicknameButton.interactable = false;
-        playButton.interactable = false;
+        //playButton.interactable = false;
 
         nicknameField.onValueChanged.AddListener(delegate
         {
@@ -187,10 +187,10 @@ public class SM_ServerManager : MonoBehaviour
 
         });
 
-        nicknameField.onValueChanged.AddListener(delegate
-        {
-            playButton.interactable = !string.IsNullOrEmpty(nicknameField.text);
-        });
+        //nicknameField.onValueChanged.AddListener(delegate
+        //{
+        //    playButton.interactable = !string.IsNullOrEmpty(nicknameField.text);
+        //});
     }
 
     void setNickName()

@@ -43,7 +43,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
     }
 
-    public override void OnJoinedLobby() {
+    public override void OnJoinedLobby() 
+    {
         SceneManager.LoadScene(scenes.ToString());
 
         RoomOptions roomOptions = new RoomOptions();
