@@ -13,10 +13,16 @@ public class SM_CharacterSelection : MonoBehaviour
     public GameObject Player2;
     public GameObject Player3;
 
+   
+
     //UI Part
     public GameObject Character1;
     public GameObject Character2;
     public GameObject Character3;
+
+    public GameObject CameraGameObject;
+
+   
 
     public GameObject CharacterSelectionPanel;
 
@@ -64,7 +70,7 @@ public class SM_CharacterSelection : MonoBehaviour
         }
 
         CharacterSelectionPanel.SetActive(false);
-
+        CameraGameObject.SetActive(false);
     }
 
     // Update is called once per frame

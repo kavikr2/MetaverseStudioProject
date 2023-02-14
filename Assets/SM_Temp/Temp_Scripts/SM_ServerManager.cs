@@ -171,7 +171,7 @@ public class SM_ServerManager : MonoBehaviour
                 if(GameManager.Instance != null)
                     GameManager.Instance.SetName(Accounts.Name);
 
-                SceneChanger();
+                SceneChanger(false);
             } 
             else { FailureNotify.OpenNotification(); }
         }
@@ -204,11 +204,12 @@ public class SM_ServerManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void SceneChanger()
+    public void SceneChanger(bool tt)
     {
         if (GameManager.Instance != null)
         {
             GameManager.Instance.SceneChanger(1);
+            GameManager.Instance.isClientLogin = tt;
         }
         else
         {

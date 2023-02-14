@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
+    public bool isClientLogin;
     #region Instance
     public static GameManager Instance;
 
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.NickName = "Lobby Guy";
+
+        
     }
 
     public override void OnConnectedToMaster()
@@ -67,6 +70,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(Enum.GetName(typeof(Scenes), scene));
     }
 
+    private void Update()
+    {
+        
+    }
 
 }
 
