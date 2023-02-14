@@ -10,7 +10,6 @@ using Photon.Realtime;
 using Photon.Pun.Demo.Asteroids;
 using Photon.Pun;
 using UnityEngine.UI;
-using UnityEditor.SearchService;
 
 public class SM_ServerManager : MonoBehaviour
 {
@@ -198,6 +197,11 @@ public class SM_ServerManager : MonoBehaviour
     void setNickName()
     {
         GameManager.Instance.SetName(nicknameField.text);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     public void SceneChanger()

@@ -1,7 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,6 +35,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.NickName = "Lobby Guy";
     }
 
     public override void OnConnectedToMaster()
