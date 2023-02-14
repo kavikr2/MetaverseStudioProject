@@ -22,7 +22,7 @@ public class PlayerList : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.LogError("Log in through LoadingScene for playerlist to work");
+            Debug.Log("Log in through LoadingScene for playerlist to work");
         }
     }
 }

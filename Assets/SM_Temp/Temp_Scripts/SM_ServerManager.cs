@@ -10,6 +10,7 @@ using Photon.Realtime;
 using Photon.Pun.Demo.Asteroids;
 using Photon.Pun;
 using UnityEngine.UI;
+using UnityEditor.SearchService;
 
 public class SM_ServerManager : MonoBehaviour
 {
@@ -168,9 +169,10 @@ public class SM_ServerManager : MonoBehaviour
             {
                 SuccessNotify.OpenNotification();
 
-                GameManager.Instance.SetName(Accounts.Name);
-                LoggedScreen.titleText = "Hello "+Accounts.Name;
-                LoggedScreen.OpenWindow();
+                if(GameManager.Instance != null)
+                    GameManager.Instance.SetName(Accounts.Name);
+
+                SceneChanger();
             } 
             else { FailureNotify.OpenNotification(); }
         }
@@ -200,7 +202,18 @@ public class SM_ServerManager : MonoBehaviour
 
     public void SceneChanger()
     {
-        GameManager.Instance.SceneChanger(1);
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.SceneChanger(1);
+        }
+        else
+        {
+            for (int i = 8; i > 0; i--)
+            {
+                SceneManager.LoadScene("SM_MetaverseScene");
+                //PhotonNetwork.JoinRoom("SM_MetaverseScene");
+            }
+        }
     }
 
     private bool CheckPlayersReady()
