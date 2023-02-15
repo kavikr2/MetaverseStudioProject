@@ -1,15 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
-using TMPro;
-using Michsky.UI.ModernUIPack;
-using UnityEngine.SceneManagement;
-using Photon.Realtime;
-using Photon.Pun.Demo.Asteroids;
-using Photon.Pun;
 using UnityEngine.UI;
+using UnityEngine.Networking;
+using Michsky.UI.ModernUIPack;
+using Photon.Pun;
+using Photon.Realtime;
+using TMPro;
 
 public class SM_ServerManager : MonoBehaviour
 {
@@ -63,10 +60,8 @@ public class SM_ServerManager : MonoBehaviour
 
         if (PhotonNetwork.InRoom)
         {
-            // Get an array of all the Photon players in the room.
             Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
 
-            // Loop through the array of players and print each player's nickname.
             for (int i = 0; i < players.Length; i++)
             {
                 Debug.Log(players[i].NickName);
@@ -206,93 +201,8 @@ public class SM_ServerManager : MonoBehaviour
 
     public void SceneChanger(bool tt)
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.SceneChanger(1);
-            GameManager.Instance.isClientLogin = tt;
-        }
-        else
-        {
-            for (int i = 8; i > 0; i--)
-            {
-                SceneManager.LoadScene("SM_MetaverseScene");
-                //PhotonNetwork.JoinRoom("SM_MetaverseScene");
-            }
-        }
-    }
-
-    private bool CheckPlayersReady()
-    {
-        if (!PhotonNetwork.IsMasterClient)
-        {
-            return false;
-        }
-
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-            object isPlayerReady;
-            if (p.CustomProperties.TryGetValue(AsteroidsGame.PLAYER_READY, out isPlayerReady))
-            {
-                if (!(bool)isPlayerReady)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private void ClearRoomListView()
-    {
-        foreach (GameObject entry in roomListEntries.Values)
-        {
-            Destroy(entry.gameObject);
-        }
-
-        roomListEntries.Clear();
-    }
-
-    private void UpdateCachedRoomList(List<RoomInfo> roomList)
-    {
-        foreach (RoomInfo info in roomList)
-        {
-            if (!info.IsOpen || !info.IsVisible || info.RemovedFromList)
-            {
-                if (cachedRoomList.ContainsKey(info.Name))
-                {
-                    cachedRoomList.Remove(info.Name);
-                }
-
-                continue;
-            }
-
-            if (cachedRoomList.ContainsKey(info.Name))
-            {
-                cachedRoomList[info.Name] = info;
-            }
-            else
-            {
-                cachedRoomList.Add(info.Name, info);
-            }
-        }
-    }
-
-    private void UpdateRoomListView()
-    {
-        foreach (RoomInfo info in cachedRoomList.Values)
-        {
-            GameObject entry = Instantiate(RoomListEntryPrefab);
-            entry.transform.SetParent(RoomListContent.transform);
-            entry.transform.localScale = Vector3.one;
-            entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, info.MaxPlayers);
-
-            roomListEntries.Add(info.Name, entry);
-        }
+        GameManager.Instance.SceneChanger(Scenes.SM_MetaverseScene);
+        GameManager.Instance.isClientLogin = tt;
     }
 }
 
