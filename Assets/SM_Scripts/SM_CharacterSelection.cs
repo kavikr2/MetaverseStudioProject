@@ -19,19 +19,16 @@ public class SM_CharacterSelection : MonoBehaviour
     public GameObject Character1;
     public GameObject Character2;
     public GameObject Character3;
-
-    public GameObject CameraGameObject;
-
    
-
     public GameObject CharacterSelectionPanel;
+    public SM_CamController CamController;
 
 
     int characterNo;
     // Start is called before the first frame update
     void Start()
     {
-        
+        CamController.enabled = false;
     }
 
     public void SelectCharacter()
@@ -70,7 +67,7 @@ public class SM_CharacterSelection : MonoBehaviour
         }
 
         CharacterSelectionPanel.SetActive(false);
-        CameraGameObject.SetActive(false);
+        CamController.enabled = true;
     }
 
     // Update is called once per frame

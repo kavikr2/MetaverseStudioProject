@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SM_PlayerMovement : MonoBehaviour
 {
+    public SM_SnapshotCamera snapCam;
+
     float speed = 0f;
     Animator animator;
     Rigidbody rb;
@@ -43,6 +45,11 @@ public class SM_PlayerMovement : MonoBehaviour
         else
         {
             animator.SetBool("isFormalBow", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            snapCam.CallTakeSnapshot();
         }
 
 
