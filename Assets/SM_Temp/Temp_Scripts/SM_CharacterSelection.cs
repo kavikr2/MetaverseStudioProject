@@ -20,7 +20,7 @@ public class SM_CharacterSelection : MonoBehaviour
     public GameObject Character2;
     public GameObject Character3;
 
-    public GameObject CameraGameObject;
+    public SM_CamController camController;
 
    
 
@@ -32,6 +32,7 @@ public class SM_CharacterSelection : MonoBehaviour
     void Start()
     {
         
+        camController.enabled = false;
     }
 
     public void SelectCharacter()
@@ -70,7 +71,7 @@ public class SM_CharacterSelection : MonoBehaviour
         }
 
         CharacterSelectionPanel.SetActive(false);
-        CameraGameObject.SetActive(false);
+        camController.enabled = true;
     }
 
     // Update is called once per frame
