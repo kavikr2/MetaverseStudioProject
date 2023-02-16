@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class SM_SnapshotCamera : MonoBehaviour
 {
+    public GameObject snapshotCamPreview;
     Camera snapCam;
     int resWidth = 256;
     int resHeight = 256;
@@ -26,6 +27,8 @@ public class SM_SnapshotCamera : MonoBehaviour
     public void CallTakeSnapshot()
     {
         snapCam.gameObject.SetActive(true);
+        snapshotCamPreview.SetActive(false);
+
     }
 
     void LateUpdate()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class SM_PlayerMovement : MonoBehaviour
 {
     public SM_SnapshotCamera snapCam;
+    
 
     float speed = 0f;
     Animator animator;
@@ -50,6 +51,8 @@ public class SM_PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             snapCam.CallTakeSnapshot();
+            
+            
         }
 
 
