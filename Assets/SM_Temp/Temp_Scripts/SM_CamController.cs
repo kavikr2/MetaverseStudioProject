@@ -1,67 +1,85 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SM_CamController : MonoBehaviour
 {
+    //public Transform camTarget;
+    //public float pLerp = 0.02f;
+    //public float rLerp = 0.01f;
+
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+
+    //}
+
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    transform.position = Vector3.Lerp(transform.position, camTarget.position, pLerp);
+    //    transform.rotation = Quaternion.Lerp(transform.rotation, camTarget.rotation, rLerp);
+    //}
+
     Vector3 offset = Vector3.zero;
+    //Vector3 velocity = Vector3.zero;
+    //public float distance = 10f;
+    //float currentDistance;
+    //float minDistance = 1f;
+    //float maxDistance = 2f;
+    //public float height = 8f;
+    //public float targetHeadHeight = 7f;
+    //float smooth = 0.3f;
+
     public Transform target; //for read target position
-    public float posX = -2;
-    public float posY = -1;
-    public float posZ = -15;
+    public float posX;
+    public float posY;
+    public float posZ;
+
 
     public float turnSpeed = 4.0f;
+    //public Transform player;
+
+    
 
     void Awake()
     {
-        
+        //offset = new Vector3(target.position.x, (target.position.y + height), (target.position.z - distance));
+        offset = new Vector3(target.position.x + posX, target.position.y + posY , target.position.z + posZ);
+        //transform.position = offset;
     }
-    private void Start()
-    {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("PlayerTarget");
-        foreach (GameObject player in players)
-        {
-            this.target = player.transform;
-            offset = new Vector3(target.position.x + posX, target.position.y + posY, target.position.z + posZ);
-        }
-    }
-    private void Update()
-    {
-
-    }
+    //void Update()
+    //{
+    //    LookAtTarget();
+    //}
     void LateUpdate()
     {
-
+        //UpdatePosition();
         offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * offset;
         transform.position = target.position + offset;
         transform.LookAt(target.position);
-
     }
-    //private Vector3 offset;
-    ////-----Publics variables-----\\
-    //[Header("Variables")]
-    //public Transform player;
-    //[Space]
-    //[Header("Position")]
-    //public float camPosX;
-    //public float camPosY;
-    //public float camPosZ;
-    //[Space]
-    //[Header("Rotation")]
-    //public float camRotationX;
-    //public float camRotationY;
-    //public float camRotationZ;
-    //[Space]
-    //[Range(0f, 10f)]
-    //public float turnSpeed;
-    ////-----Privates functions-----\\
-    //private void Start()
+    //void LookAtTarget()
     //{
-    //    offset = new Vector3(player.position.x + camPosX, player.position.y + camPosY, player.position.z + camPosZ);
-    //    transform.rotation = Quaternion.Euler(camRotationX, camRotationY, camRotationZ);
+    //    Vector3 relativePos = target.position - transform.position;
+    //    Vector3 y = new Vector3(0, targetHeadHeight, 0);
+    //    Quaternion newRotation = Quaternion.LookRotation(relativePos + y);
+    //    transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, 10f * Time.deltaTime);
     //}
-    //private void Update()
+
+    //void UpdatePosition()
     //{
-    //    offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * Quaternion.AngleAxis(Input.GetAxis("Mouse Y") * turnSpeed, Vector3.right) * offset;
-    //    transform.position = player.position + offset;
-    //    transform.LookAt(player.position);
+    //    currentDistance = Vector3.Distance(transform.position, target.position);
+    //    if (currentDistance < minDistance)
+    //    {
+    //        currentDistance = minDistance;
+    //    }
+    //    else if (currentDistance > maxDistance)
+    //    {
+    //        currentDistance = maxDistance;
+    //    }
+    //    distance = currentDistance;
+    //    offset = new Vector3(target.position.x, (target.position.y + height), (target.position.z - distance));
+    //    transform.position = Vector3.SmoothDamp(transform.position, offset, ref velocity, smooth);
     //}
 }
