@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class SM_Playerview : MonoBehaviour
 {
-    public Text name;
+    public TMP_Text name;
 }

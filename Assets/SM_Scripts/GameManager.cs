@@ -1,12 +1,12 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public bool isClientLogin;
     #region Instance
     public static GameManager Instance;
 
@@ -20,42 +20,81 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Destroy(gameObject);
         }
-
         DontDestroyOnLoad(gameObject);
     }
 
     #endregion
+
+    public bool isClientLogin;
+    private bool connectedToRoom = false;
+    private bool connectedToLobby = false;
+    private bool connectedToServer = false;
 
     [HideInInspector]
     public string playerName = "";
 
     [HideInInspector]
     public Characters characterSelected;
-    public Scenes scenes = 0;
+    public Scenes thisScene = 0;
 
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
-        PhotonNetwork.NickName = "Lobby Guy";
 
-        
+        PhotonNetwork.GameVersion = "0.01"; 
+        PhotonNetwork.ConnectUsingSettings();
+        PhotonNetwork.NickName = "Lobby Member";
+
+        StartCoroutine(WaitForConnection(thisScene));
+
+    }
+
+    IEnumerator WaitForConnection(Scenes scenes)
+    {
+        while (!connectedToServer)
+        {
+            yield return null;
+        }
+
+        Debug.Log("Connected to Photon Server!");
+
+        RoomOptions roomOptions = new RoomOptions();
+        PhotonNetwork.JoinOrCreateRoom(scenes.ToString(), roomOptions, TypedLobby.Default);
+        StartCoroutine(WaitForJoinRoom());
+    }
+
+    IEnumerator WaitForJoinRoom()
+    {
+        while (!connectedToRoom)
+        {
+            yield return null;
+        }
+
+        Debug.Log("Joined Room " + PhotonNetwork.CurrentRoom.Name);
+    }
+
+    IEnumerator WaitForJoinLobby()
+    {
+        while (!connectedToLobby)
+        {
+            yield return null;
+        }
     }
 
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinLobby();
+        Debug.Log("Connected to Master Server!");
+        connectedToServer = true;
     }
 
-    public override void OnJoinedLobby() 
+    public override void OnJoinedLobby()
     {
-        SceneManager.LoadScene(scenes.ToString());
+        Debug.Log("Joined Lobby!");
+        connectedToLobby = true;
+    }
 
-        RoomOptions roomOptions = new RoomOptions();
-
-        foreach (Scenes room in Enum.GetValues(typeof(Scenes)))
-        {
-            PhotonNetwork.CreateRoom(room.ToString(), roomOptions, TypedLobby.Default);
-        }
+    public override void OnJoinedRoom()
+    {
+        connectedToRoom= true;
     }
 
     public void SetName(string name)
@@ -64,15 +103,30 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = name;
     }
 
-    public void SceneChanger(int scene)
+    public void SceneChanger(Scenes scene)
     {
-        SceneManager.LoadScene(Enum.GetName(typeof(Scenes), scene));
-        PhotonNetwork.JoinRoom(Enum.GetName(typeof(Scenes), scene));
+        thisScene= scene;
+        PhotonNetwork.LoadLevel(scene.ToString());
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+
+    public void OnLevelFinishedLoading(int level)
+    {
+        Debug.Log(level);
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("Disconnected because " + cause.ToString());
     }
 
 }
