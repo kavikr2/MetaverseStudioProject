@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Start()
     {
 
-
         PhotonNetwork.GameVersion = "0.01"; 
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.NickName = "Lobby Member";
@@ -79,12 +78,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             yield return null;
         }
-
-        PhotonNetwork.ConnectUsingSettings();
-        PhotonNetwork.NickName = "Lobby Guy";
-
     }
-    
+
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to Master Server!");
