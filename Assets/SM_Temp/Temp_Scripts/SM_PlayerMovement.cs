@@ -7,6 +7,9 @@ public class SM_PlayerMovement : MonoBehaviour
     float speed = 0f;
     Animator animator;
     Rigidbody rb;
+
+    public SM_SnapshotCamera snapCam;
+    public GameObject snapCamPreview;
     
     void Start()
     {
@@ -43,6 +46,11 @@ public class SM_PlayerMovement : MonoBehaviour
         else
         {
             animator.SetBool("isFormalBow", false);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            snapCam.CallTakeSnapshot();
+            snapCamPreview.SetActive(false);
         }
 
 
