@@ -11,4 +11,4 @@ public class SM_VideoRuntime : MonoBehaviour
         // play video player
         MyVideoPlayer.Play();
     }
-}
+}   
