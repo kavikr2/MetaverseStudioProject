@@ -1,9 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
-using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -28,27 +26,26 @@ public class GameManager : MonoBehaviourPunCallbacks
     public bool isClientLogin;
     private bool connectedToRoom = false;
     private bool connectedToLobby = false;
-    private bool connectedToServer = false;
+    [HideInInspector]
+    public bool connectedToServer = false;
 
     [HideInInspector]
     public string playerName = "";
 
     [HideInInspector]
-    public Characters characterSelected;
+    public int characterSelected = 0;
     public Scenes thisScene = 0;
 
     private void Start()
     {
-
-        PhotonNetwork.GameVersion = "0.01"; 
+        PhotonNetwork.GameVersion = "0.01";
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.NickName = "Lobby Member";
 
-        StartCoroutine(WaitForConnection(thisScene));
-
+        StartCoroutine(WaitForConnection());
     }
 
-    IEnumerator WaitForConnection(Scenes scenes)
+    IEnumerator WaitForConnection()
     {
         while (!connectedToServer)
         {
@@ -57,19 +54,25 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         Debug.Log("Connected to Photon Server!");
 
-        RoomOptions roomOptions = new RoomOptions();
-        PhotonNetwork.JoinOrCreateRoom(scenes.ToString(), roomOptions, TypedLobby.Default);
-        StartCoroutine(WaitForJoinRoom());
+        if(thisScene== 0) {
+            TypedLobby lobby = new TypedLobby(thisScene.ToString(), LobbyType.Default);
+            PhotonNetwork.JoinLobby(lobby);
+            StartCoroutine(WaitForJoinLobby());
+        } else {
+            RoomOptions roomOptions = new RoomOptions();
+            PhotonNetwork.JoinOrCreateRoom(thisScene.ToString(), roomOptions, TypedLobby.Default);
+            StartCoroutine(WaitForJoinRoom(thisScene.ToString()));
+        }
     }
 
-    IEnumerator WaitForJoinRoom()
+    IEnumerator WaitForJoinRoom(string scene)
     {
         while (!connectedToRoom)
         {
-            yield return null;
+           yield return null;
         }
 
-        Debug.Log("Joined Room " + PhotonNetwork.CurrentRoom.Name);
+        Debug.Log("Joined :" + scene.ToString());
     }
 
     IEnumerator WaitForJoinLobby()
@@ -78,23 +81,23 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             yield return null;
         }
+
+        Debug.Log("Joined :" +thisScene.ToString());
     }
 
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Connected to Master Server!");
         connectedToServer = true;
     }
 
     public override void OnJoinedLobby()
     {
-        Debug.Log("Joined Lobby!");
         connectedToLobby = true;
     }
 
-    public override void OnJoinedRoom()
+    public override void OnCreatedRoom()
     {
-        connectedToRoom= true;
+        connectedToRoom = true;
     }
 
     public void SetName(string name)
@@ -105,23 +108,23 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void SceneChanger(Scenes scene)
     {
-        thisScene= scene;
+        thisScene = scene;
         PhotonNetwork.LoadLevel(scene.ToString());
+
+        RoomOptions roomOptions = new RoomOptions();
+
+        PhotonNetwork.JoinOrCreateRoom(thisScene.ToString(), roomOptions, TypedLobby.Default);
+        StartCoroutine(WaitForJoinRoom(thisScene.ToString()));
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
         PhotonNetwork.AddCallbackTarget(this);
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
         PhotonNetwork.RemoveCallbackTarget(this);
-    }
-
-    public void OnLevelFinishedLoading(int level)
-    {
-        Debug.Log(level);
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -130,18 +133,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
 }
-
 public enum Scenes
 {
     SM_LoginScene,
     SM_MetaverseScene,
     Minigame1,
     Minigame2
-}
-
-public enum Characters
-{
-    Zero,
-    One,
-    Two
 }

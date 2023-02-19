@@ -1,9 +1,5 @@
 using Michsky.UI.ModernUIPack;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
-using Michsky.UI;
 
 public class SM_StaffCharSelection : MonoBehaviour
 {

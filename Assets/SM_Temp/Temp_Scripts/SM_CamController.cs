@@ -24,12 +24,12 @@ public class SM_CamController : MonoBehaviour
             offset = new Vector3(target.position.x + posX, target.position.y + posY, target.position.z + posZ);
         }
     }
-    void LateUpdate()
-    {
-        //UpdatePosition();
-        offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * offset;
-        transform.position = target.position + offset;
-        transform.LookAt(target.position);
-    }
+    //void LateUpdate()
+    //{
+    //    //UpdatePosition();
+    //    offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * offset;
+    //    transform.position = target.position + offset;
+    //    transform.LookAt(target.position);
+    //}
     
 }

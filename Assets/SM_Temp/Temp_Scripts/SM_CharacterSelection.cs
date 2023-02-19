@@ -1,35 +1,29 @@
 using Michsky.UI.ModernUIPack;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Photon.Pun;
 using UnityEngine;
-using Michsky.UI;
 
 public class SM_CharacterSelection : MonoBehaviour
 {
     public HorizontalSelector mySelector;
+    public GameObject CanvasCamera;
 
-    public GameObject Player1;
-    public GameObject Player2;
-    public GameObject Player3;
+    [Header("Spawner")]
+    [SerializeField] private GameObject[] characterPrefabs;
+    [SerializeField] private Transform[] spawnPoints;
 
-    public SM_CamController camController;
-
-   
-
-    //UI Part
+    [Header("UI")]
     public GameObject Character1;
     public GameObject Character2;
     public GameObject Character3;
 
     public GameObject CharacterSelectionPanel;
-
-
+    
     int characterNo;
+
     // Start is called before the first frame update
     void Start()
     {
-        camController.enabled = false;
+
     }
 
     public void SelectCharacter()
@@ -37,38 +31,21 @@ public class SM_CharacterSelection : MonoBehaviour
         switch (characterNo)
         {
             case 0:
-                Player1.SetActive(true);
-                Player2.SetActive(false);
-                Player3.SetActive(false);
-
                 Character1.SetActive(true);
-                Character2.SetActive(false);
-                Character3.SetActive(false);
                 break;
 
             case 1:
-                Player2.SetActive(true);
-                Player1.SetActive(false);
-                Player3.SetActive(false);
-
                 Character2.SetActive(true);
-                Character1.SetActive(false);
-                Character3.SetActive(false);
                 break;
 
             case 2:
-                Player3.SetActive(true);
-                Player1.SetActive(false);
-                Player2.SetActive(false);
-
                 Character3.SetActive(true);
-                Character1.SetActive(false);
-                Character2.SetActive(false);
                 break;
         }
 
+        GameManager.Instance.characterSelected = characterNo;
+        SpawnPlayer();
         CharacterSelectionPanel.SetActive(false);
-        camController.enabled = true;
 
     }
 
@@ -96,6 +73,20 @@ public class SM_CharacterSelection : MonoBehaviour
                 Character1.SetActive(false);
                 Character2.SetActive(false);
                 break;
+        }
+    }
+
+    public void SpawnPlayer()
+    {
+        if (GameManager.Instance.connectedToServer)
+        {
+            int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
+            // int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+
+            PhotonNetwork.Instantiate(characterPrefabs[GameManager.Instance.characterSelected].name, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
+
+            Destroy(CanvasCamera);
+            Destroy(gameObject);
         }
     }
 }
