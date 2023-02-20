@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public bool connectedToServer = false;
 
     [HideInInspector]
-    public string playerName = "";
+    public string playerName;
 
     [HideInInspector]
     public int characterSelected = 0;
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.GameVersion = "0.01";
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.NickName = "Lobby Member";
+        playerName = "Kavi";
 
         StartCoroutine(WaitForConnection());
     }

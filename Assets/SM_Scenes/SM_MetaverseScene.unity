@@ -20898,7 +20898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8189fb2dd44538349a6ff4c3b611f4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isClientLogin: 1
+  isClientLogin: 0
   connectedToServer: 0
   playerName: 
   characterSelected: 0
@@ -23594,12 +23594,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySelector: {fileID: 1751172590}
-  Staff1Object: {fileID: 0}
-  Staff2Object: {fileID: 0}
+  canvasCamera: {fileID: 1746960671}
+  playerDisplayname: {fileID: 866865048558789186, guid: 24783fd7f51049d46a52ab6c1c491b1c, type: 3}
+  characterPrefabs:
+  - {fileID: 7308919659913318742}
+  - {fileID: 958543284257310611}
+  spawnPoints:
+  - {fileID: 270753885}
   StaffChar1Object: {fileID: 7308919659913318742}
   StaffChar2Object: {fileID: 958543284257310611}
   CharacterSelectionPanelObject: {fileID: 1929541551}
-  camController: {fileID: 0}
+  camController: {fileID: 1746960671}
 --- !u!224 &1929541556
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40017,7 +40022,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mySelector: {fileID: 7737506793613592568}
-  CanvasCamera: {fileID: 1746960671}
+  canvasCamera: {fileID: 1746960671}
+  playerDisplayname: {fileID: 866865048558789186, guid: 24783fd7f51049d46a52ab6c1c491b1c, type: 3}
   characterPrefabs:
   - {fileID: 3946694208883602987, guid: 096e975976e7ddf4e80c92a05d430e8b, type: 3}
   - {fileID: 2844869973986558665, guid: 019773f755790c44490edf6c671f5fdc, type: 3}

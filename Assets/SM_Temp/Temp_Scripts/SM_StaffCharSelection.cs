@@ -1,11 +1,16 @@
 using Michsky.UI.ModernUIPack;
+using Photon.Pun;
 using UnityEngine;
 
 public class SM_StaffCharSelection : MonoBehaviour
 {
     public HorizontalSelector mySelector;
-    public GameObject Staff1Object;
-    public GameObject Staff2Object;
+    public SM_CamController canvasCamera;
+    public GameObject playerDisplayname;
+
+    [Header("Spawner")]
+    [SerializeField] private GameObject[] characterPrefabs;
+    [SerializeField] private Transform[] spawnPoints;
 
     public GameObject StaffChar1Object;
     public GameObject StaffChar2Object;
@@ -15,35 +20,28 @@ public class SM_StaffCharSelection : MonoBehaviour
 
     int characterNo;
 
-
     public void SelectCharacter()
     {
         switch (characterNo)
         {
             case 0:
-                Staff1Object.SetActive(true);
-                Staff2Object.SetActive(false);
-
                 StaffChar1Object.SetActive(true);
-                StaffChar2Object.SetActive(false);
                 break;
 
                 case 1:
-                Staff2Object.SetActive(true);
-                Staff1Object.SetActive(false);
-
                 StaffChar2Object.SetActive(true);
-                StaffChar1Object.SetActive(false);
                 break ;
-
         }
-        camController.enabled = true;
+
+        GameManager.Instance.characterSelected = 3 + characterNo;
+        SpawnPlayer();
         CharacterSelectionPanelObject.SetActive(false);
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        camController.enabled = false;
+
     }
 
     // Update is called once per frame
@@ -61,6 +59,19 @@ public class SM_StaffCharSelection : MonoBehaviour
                 StaffChar2Object.SetActive(true);
                 StaffChar1Object.SetActive(false);
                 break;
+        }
+    }
+    public void SpawnPlayer()
+    {
+        if (GameManager.Instance.connectedToServer)
+        {
+            int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
+            // int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+
+            PhotonNetwork.Instantiate(characterPrefabs[characterNo].name, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
+            Instantiate(playerDisplayname);
+            canvasCamera.enabled = true;
+            Destroy(gameObject);
         }
     }
 }
