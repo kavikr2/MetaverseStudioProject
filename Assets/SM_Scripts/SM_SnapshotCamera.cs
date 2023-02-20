@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 
@@ -7,7 +6,7 @@ using UnityEngine;
 public class SM_SnapshotCamera : MonoBehaviour
 {
     public GameObject snapshotCamPreview;
-
+    PhotonView myView;
     Camera snapCam;
 
     int resWidth = 256;
@@ -16,7 +15,7 @@ public class SM_SnapshotCamera : MonoBehaviour
     private void Awake()
     {
         snapCam = GetComponent<Camera>();
-        if(snapCam.targetTexture == null)
+        if (snapCam.targetTexture == null)
         {
             snapCam.targetTexture = new RenderTexture(resWidth, resHeight, 24);
         }
@@ -32,26 +31,27 @@ public class SM_SnapshotCamera : MonoBehaviour
     {
         snapCam.gameObject.SetActive(true);
         snapshotCamPreview.SetActive(false);
+
     }
 
     void LateUpdate()
     {
-        if (snapCam.gameObject.activeInHierarchy)
+        if (myView.IsMine)
         {
-            Texture2D snapshot = new Texture2D(resWidth,resHeight, TextureFormat.RGB24, false);
-            snapCam.Render();
-            RenderTexture.active = snapCam.targetTexture;
-            snapshot.ReadPixels(new Rect(0,0,resWidth,resHeight),0,0);
-            byte[] bytes = snapshot.EncodeToPNG();
-            string fileName = SnapshotName();
-            System.IO.File.WriteAllBytes(fileName, bytes);
-            Debug.Log("Snapshot Taken!");
-            snapCam.gameObject.SetActive(false);
-
-           
-            
-
+            if (snapCam.gameObject.activeInHierarchy)
+            {
+                Texture2D snapshot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
+                snapCam.Render();
+                RenderTexture.active = snapCam.targetTexture;
+                snapshot.ReadPixels(new Rect(0, 0, resWidth, resHeight), 0, 0);
+                byte[] bytes = snapshot.EncodeToPNG();
+                string fileName = SnapshotName();
+                System.IO.File.WriteAllBytes(fileName, bytes);
+                Debug.Log("Snapshot Taken!");
+                snapCam.gameObject.SetActive(false);
+            }
         }
+
     }
 
     string SnapshotName()
@@ -66,12 +66,12 @@ public class SM_SnapshotCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        myView = transform.GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

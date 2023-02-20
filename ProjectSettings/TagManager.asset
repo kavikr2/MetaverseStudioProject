@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CamTarget
+  - SnapshotCam
+  - SnapshotPreview
   layers:
   - Default
   - TransparentFX

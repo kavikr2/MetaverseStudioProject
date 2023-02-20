@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class SM_CamController : MonoBehaviour
 {
@@ -15,21 +16,25 @@ public class SM_CamController : MonoBehaviour
 
     public float turnSpeed = 4.0f;
  
-    private void Start()
+    void Start()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("CamTarget");
         foreach(GameObject player in players)
         {
-            this.target = player.transform;
-            offset = new Vector3(target.position.x + posX, target.position.y + posY, target.position.z + posZ);
+            if (PhotonView.Get(player).IsMine)
+            {
+                this.target = player.transform;
+                offset = new Vector3(target.position.x + posX, target.position.y + posY, target.position.z + posZ);
+            }
+           
         }
     }
-    //void LateUpdate()
-    //{
-    //    //UpdatePosition();
-    //    offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * offset;
-    //    transform.position = target.position + offset;
-    //    transform.LookAt(target.position);
-    //}
-    
+    void LateUpdate()
+    {
+        //UpdatePosition();
+        offset = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * turnSpeed, Vector3.up) * offset;
+        transform.position = target.position + offset;
+        transform.LookAt(target.position);
+    }
+
 }

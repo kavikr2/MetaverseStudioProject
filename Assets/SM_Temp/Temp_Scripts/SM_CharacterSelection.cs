@@ -5,7 +5,7 @@ using UnityEngine;
 public class SM_CharacterSelection : MonoBehaviour
 {
     public HorizontalSelector mySelector;
-    public GameObject CanvasCamera;
+    public SM_CamController CanvasCamera;
 
     [Header("Spawner")]
     [SerializeField] private GameObject[] characterPrefabs;
@@ -84,8 +84,8 @@ public class SM_CharacterSelection : MonoBehaviour
             // int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
             PhotonNetwork.Instantiate(characterPrefabs[GameManager.Instance.characterSelected].name, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
-
-            Destroy(CanvasCamera);
+            CanvasCamera.enabled = true;
+            //Destroy(CanvasCamera);
             Destroy(gameObject);
         }
     }

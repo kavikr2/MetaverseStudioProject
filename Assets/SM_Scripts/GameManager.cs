@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     public int characterSelected = 0;
     public Scenes thisScene = 0;
 
+    public SM_SnapshotCamera snapCam;
+
     private void Start()
     {
         PhotonNetwork.GameVersion = "0.01";
