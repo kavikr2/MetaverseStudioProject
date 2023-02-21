@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,19 +11,21 @@ public class PlayerList : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if (PhotonNetwork.IsConnected)
+        StartCoroutine(LoadPlayer());
+    }
+
+    IEnumerator LoadPlayer()
+    {
+        if (!GameManager.Instance.connectedToServer)
         {
-            Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
-            foreach (Photon.Realtime.Player player in players)
-            {
-                GameObject room = Instantiate(playerview,Vector3.zero, Quaternion.identity, GameObject.Find("playerscontent").transform);
-                room.GetComponent<SM_Playerview>().name.text = player.NickName;
-                Debug.Log("Player nickname: " + player.NickName);
-            }
+            yield return null;
         }
-        else
+        for (int i = 0; i < PhotonNetwork.CountOfPlayers; i++)
         {
-            Debug.Log("Log in through LoadingScene for playerlist to work");
+            GameObject edit = Instantiate(playerview, Vector3.zero, Quaternion.identity, GameObject.Find("playerscontent").transform);
+            edit.GetComponent<SM_Playerview>();
+            edit.name = GameManager.Instance.playerName;
+            Debug.Log("Player nickname: " + GameManager.Instance.playerName);
         }
     }
 }

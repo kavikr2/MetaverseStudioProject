@@ -56,7 +56,7 @@ public class SM_ServerManager : MonoBehaviour
 
     public void Start()
     {
-        SetNickname();
+        SetInteractablility();
 
         if (PhotonNetwork.InRoom)
         {
@@ -172,7 +172,7 @@ public class SM_ServerManager : MonoBehaviour
         }
     }
 
-    public void SetNickname()
+    public void SetInteractablility()
     {
         nicknameButton.interactable = false;
         //playButton.interactable = false;
@@ -189,7 +189,7 @@ public class SM_ServerManager : MonoBehaviour
         //});
     }
 
-    void setNickName()
+    public void SetNickName()
     {
         GameManager.Instance.SetName(nicknameField.text);
     }
