@@ -10,7 +10,7 @@ public class SM_PlaceholderUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myView = GetComponent<PhotonView>();
+        myView = transform.GetComponent<PhotonView>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +29,9 @@ public class SM_PlaceholderUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            snapCamPreview.SetActive(false);
+        }
     }
 }

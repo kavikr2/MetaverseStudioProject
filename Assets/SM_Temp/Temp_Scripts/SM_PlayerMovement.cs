@@ -15,6 +15,7 @@ public class SM_PlayerMovement : MonoBehaviour
 
 
     PhotonView myView;
+    
     void Start()
     {
         myView = transform.GetComponent<PhotonView>();
