@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public bool isClientLogin;
     private bool connectedToRoom = false;
-    private bool connectedToLobby = false;
     [HideInInspector]
     public bool connectedToServer = false;
 
@@ -45,6 +44,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = "Lobby Member";
         playerName = "Kavi";
 
+        Debug.Log("Loading pls wait ...");
         StartCoroutine(WaitForConnection());
     }
 
@@ -55,17 +55,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             yield return null;
         }
 
-        Debug.Log("Connected to Photon Server!");
-
-        if(thisScene== 0) {
-            TypedLobby lobby = new TypedLobby(thisScene.ToString(), LobbyType.Default);
-            PhotonNetwork.JoinLobby(lobby);
-            StartCoroutine(WaitForJoinLobby());
-        } else {
-            RoomOptions roomOptions = new RoomOptions();
-            PhotonNetwork.JoinOrCreateRoom(thisScene.ToString(), roomOptions, TypedLobby.Default);
-            StartCoroutine(WaitForJoinRoom(thisScene.ToString()));
-        }
+        if(thisScene == Scenes.SM_MetaverseScene) { EnterMetaverse(true); }
+        else { StartCoroutine(PhotonSceneChanger(thisScene)); }
     }
 
     IEnumerator WaitForJoinRoom(string scene)
@@ -78,24 +69,41 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("Joined :" + scene.ToString());
     }
 
-    IEnumerator WaitForJoinLobby()
+    IEnumerator PhotonSceneChanger(Scenes scene)
     {
-        while (!connectedToLobby)
-        {
-            yield return null;
+        if (scene == Scenes.SM_LoginScene) {
+            TypedLobby lobby = new TypedLobby(scene.ToString(), LobbyType.Default);
+            PhotonNetwork.JoinLobby(lobby);
+            Debug.Log("Welcome to KaviVerse");
         }
+        else if(scene == Scenes.SM_MetaverseScene) 
+        {
+            connectedToServer = false; PhotonNetwork.LeaveRoom();
 
-        Debug.Log("Joined :" +thisScene.ToString());
+            while (!connectedToServer)
+            {
+                yield return null;
+            }
+
+            PhotonNetwork.RejoinRoom(scene.ToString());
+        }
+        else if(scene == Scenes.SM_Minigame1 || scene == Scenes.SM_Minigame2)
+        {
+            connectedToServer = false; PhotonNetwork.LeaveRoom();
+
+            while (!connectedToServer)
+            {
+                yield return null;
+            }
+            RoomOptions roomOptions = new RoomOptions();
+            PhotonNetwork.JoinOrCreateRoom(scene.ToString(), roomOptions, TypedLobby.Default);
+            StartCoroutine(WaitForJoinRoom(scene.ToString()));
+        }
     }
 
     public override void OnConnectedToMaster()
     {
         connectedToServer = true;
-    }
-
-    public override void OnJoinedLobby()
-    {
-        connectedToLobby = true;
     }
 
     public override void OnCreatedRoom()
@@ -109,15 +117,27 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = name;
     }
 
+    public void EnterMetaverse(bool FirstTime)
+    {
+        thisScene = Scenes.SM_MetaverseScene;
+
+        if (FirstTime){
+            PhotonNetwork.LoadLevel(thisScene.ToString());
+            RoomOptions roomOptions = new RoomOptions();
+            PhotonNetwork.JoinOrCreateRoom(thisScene.ToString(), roomOptions, TypedLobby.Default);
+            StartCoroutine(WaitForJoinRoom(thisScene.ToString()));
+        }
+        else {
+            PhotonNetwork.LoadLevel(thisScene.ToString());
+            StartCoroutine(PhotonSceneChanger(thisScene));
+        }
+    }
+
     public void SceneChanger(Scenes scene)
     {
         thisScene = scene;
-        PhotonNetwork.LoadLevel(scene.ToString());
-
-        RoomOptions roomOptions = new RoomOptions();
-
-        PhotonNetwork.JoinOrCreateRoom(thisScene.ToString(), roomOptions, TypedLobby.Default);
-        StartCoroutine(WaitForJoinRoom(thisScene.ToString()));
+        PhotonNetwork.LoadLevel(thisScene.ToString());
+        StartCoroutine(PhotonSceneChanger(thisScene));
     }
 
     public override void OnEnable()
@@ -140,6 +160,6 @@ public enum Scenes
 {
     SM_LoginScene,
     SM_MetaverseScene,
-    Minigame1,
-    Minigame2
+    SM_Minigame1,
+    SM_Minigame2
 }

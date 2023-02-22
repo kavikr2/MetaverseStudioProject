@@ -201,7 +201,7 @@ public class SM_ServerManager : MonoBehaviour
 
     public void SceneChanger(bool tt)
     {
-        GameManager.Instance.SceneChanger(Scenes.SM_MetaverseScene);
+        GameManager.Instance.EnterMetaverse(true);
         GameManager.Instance.isClientLogin = tt;
     }
 }

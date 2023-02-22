@@ -1,7 +1,11 @@
 using UnityEngine;
-using TMPro;
-
+using UnityEngine.UI;
 public class SM_Playerview : MonoBehaviour
 {
-    public new TMP_Text name;
+    public Text name;
+    public GameObject gameObject;
+    private void Start()
+    {
+        name.text = gameObject.name;
+    }
 }
