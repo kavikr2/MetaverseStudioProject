@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class SM_SnapshotCamera : MonoBehaviour
 {
-    public GameObject snapshotCamPreview;
+    //public GameObject snapshotCamPreview;
     PhotonView myView;
     Camera snapCam;
 
@@ -29,15 +29,15 @@ public class SM_SnapshotCamera : MonoBehaviour
 
     public void CallTakeSnapshot()
     {
-        snapCam.gameObject.SetActive(true);
-        snapshotCamPreview.SetActive(false);
+        //if (myView.IsMine)
+        //{
+            snapCam.gameObject.SetActive(true);
+        //}
 
     }
 
     void LateUpdate()
     {
-        if (myView.IsMine)
-        {
             if (snapCam.gameObject.activeInHierarchy)
             {
                 Texture2D snapshot = new Texture2D(resWidth, resHeight, TextureFormat.RGB24, false);
@@ -50,8 +50,6 @@ public class SM_SnapshotCamera : MonoBehaviour
                 Debug.Log("Snapshot Taken!");
                 snapCam.gameObject.SetActive(false);
             }
-        }
-
     }
 
     string SnapshotName()

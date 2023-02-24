@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Unity.VisualScripting;
+using Michsky.UI.ModernUIPack;
 
 public class SM_PlayerMovement : MonoBehaviour
 {
@@ -11,16 +12,17 @@ public class SM_PlayerMovement : MonoBehaviour
     Rigidbody rb;
 
     //GameObject snapCam;
-    GameObject snapCamPreview;
+    //GameObject snapCamPreview;
 
-
+    NotificationManager SnapshotNotification;
     PhotonView myView;
     
     void Start()
     {
+        SnapshotNotification = FindObjectOfType<NotificationManager>();
         myView = transform.GetComponent<PhotonView>();
         //snapCam = GameObject.FindGameObjectWithTag("SnapshotCam");
-        snapCamPreview = GameObject.FindGameObjectWithTag("SnapshotPreview");
+        //snapCamPreview = GameObject.FindGameObjectWithTag("SnapshotPreview");
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
     }
@@ -30,6 +32,13 @@ public class SM_PlayerMovement : MonoBehaviour
         
         if (myView.IsMine)
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //SM_SnapshotManager.snapManager.snapCam.CallTakeSnapshot();
+                SM_SnapshotManager.snapManager.SnapPreviewCamObject.SetActive(false);
+                SM_SnapshotManager.snapManager.MainCamera.SetActive(true);
+            }
+
             //Animations
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             {
@@ -58,11 +67,7 @@ public class SM_PlayerMovement : MonoBehaviour
             {
                 animator.SetBool("isFormalBow", false);
             }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                GameManager.Instance.snapCam.CallTakeSnapshot();
-                snapCamPreview.SetActive(false);
-            }
+            
 
 
             //Movement 
@@ -78,14 +83,19 @@ public class SM_PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.D)) { transform.Rotate(0, 2, 0); }
 
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+            
         }
-        
-
-
-       
-        
 
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Pointer") && myView.IsMine)
+        {
+            SM_SnapshotManager.snapManager.SnapPreviewCamObject.SetActive(true);
+            SM_SnapshotManager.snapManager.MainCamera.SetActive(false);
+            SnapshotNotification.OpenNotification();
+        }
+    }
 
-    
 }

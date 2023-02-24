@@ -8,6 +8,7 @@ TagManager:
   - SnapshotCam
   - SnapshotPreview
   - NameHolder
+  - Pointer
   layers:
   - Default
   - TransparentFX

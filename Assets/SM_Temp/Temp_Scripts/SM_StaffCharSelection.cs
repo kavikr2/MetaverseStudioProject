@@ -16,7 +16,7 @@ public class SM_StaffCharSelection : MonoBehaviour
     public GameObject StaffChar2Object;
 
     public GameObject CharacterSelectionPanelObject;
-    public SM_CamController camController;
+    //public SM_CamController camController;
 
     int characterNo;
 
