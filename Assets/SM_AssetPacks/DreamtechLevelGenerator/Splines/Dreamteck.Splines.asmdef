@@ -1,0 +1,16 @@
+{
+    "name": "Dreamteck.Splines",
+    "rootNamespace": "",
+    "references": [
+        "Dreamteck.Utilities"
+    ],
+    "includePlatforms": [],
+    "exludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": "",
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
