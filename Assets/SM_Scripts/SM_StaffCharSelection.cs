@@ -7,7 +7,9 @@ public class SM_StaffCharSelection : MonoBehaviour
     public HorizontalSelector mySelector;
     public SM_CamController canvasCamera;
     public MiniCamFollow miniMapCam;
+   
     public GameObject playerDisplayname;
+
 
     [Header("Spawner")]
     [SerializeField] private GameObject[] characterPrefabs;
@@ -73,6 +75,9 @@ public class SM_StaffCharSelection : MonoBehaviour
             Instantiate(playerDisplayname);
             canvasCamera.enabled = true;
             miniMapCam.enabled = true;
+
+            
+
             Destroy(gameObject);
         }
     }
