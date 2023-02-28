@@ -1,7 +1,9 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -25,14 +27,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public bool isClientLogin;
     private bool connectedToRoom = false;
-    [HideInInspector]
-    public bool connectedToServer = false;
 
-    [HideInInspector]
-    public string playerName;
+    [HideInInspector] public bool FirstTime = true;
+    [HideInInspector] public bool connectedToServer = false;
 
-    [HideInInspector]
-    public int characterSelected = 0;
+    [HideInInspector] public string characterSelected;
+    [HideInInspector] public Transform playerpos;
+    [HideInInspector] public string playerName;
+
     public Scenes thisScene = 0;
 
     
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 yield return null;
             }
 
+            connectedToRoom = false; StartCoroutine(SpawnPlayer());
             PhotonNetwork.RejoinRoom(scene.ToString());
         }
         else if(scene == Scenes.SM_Minigame1 || scene == Scenes.SM_Minigame2)
@@ -96,11 +99,23 @@ public class GameManager : MonoBehaviourPunCallbacks
                 yield return null;
             }
             RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 1;
             PhotonNetwork.JoinOrCreateRoom(scene.ToString(), roomOptions, TypedLobby.Default);
+            PhotonNetwork.LoadLevel(scene.ToString());
             StartCoroutine(WaitForJoinRoom(scene.ToString()));
         }
     }
-
+    IEnumerator SpawnPlayer()
+    {
+        while (!connectedToRoom)
+        {
+            yield return null;
+        }
+            Debug.Log("tried");
+            Vector3 pu = new Vector3(0.39f, 2.97f, 12.2f);
+            GameObject pp = PhotonNetwork.Instantiate(GameManager.Instance.characterSelected, pu, Quaternion.identity);
+        
+    }
     public override void OnConnectedToMaster()
     {
         connectedToServer = true;
@@ -111,6 +126,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         connectedToRoom = true;
     }
 
+    public override void OnJoinedRoom()
+    {
+        connectedToRoom= true;
+    }
     public void SetName(string name)
     {
         playerName = name;
@@ -121,7 +140,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         thisScene = Scenes.SM_MetaverseScene;
 
-        if (FirstTime){
+        if (FirstTime){ 
             PhotonNetwork.LoadLevel(thisScene.ToString());
             RoomOptions roomOptions = new RoomOptions();
             PhotonNetwork.JoinOrCreateRoom(thisScene.ToString(), roomOptions, TypedLobby.Default);
@@ -138,6 +157,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         thisScene = scene;
         PhotonNetwork.LoadLevel(thisScene.ToString());
         StartCoroutine(PhotonSceneChanger(thisScene));
+    }
+
+    public void EnterEnterTest()
+    {
+        SceneManager.LoadSceneAsync(Scenes.SM_Minigame1.ToString(), LoadSceneMode.Additive);
+    }
+    public void EnterExitTest()
+    {
+        SceneManager.UnloadSceneAsync(Scenes.SM_Minigame1.ToString());
     }
 
     public override void OnEnable()

@@ -8,10 +8,11 @@ public class PlayerList : MonoBehaviourPunCallbacks
 {
     public string roomName = "M_MetaverseScene";
     public GameObject playerview;
+    GameObject playerscontent;
 
     //int playerCount = 0;
     private void Start()
-    { ButtonStart(); }
+    { playerscontent = GameObject.Find("playerscontent"); ButtonStart(); }
     private void Update()
     {
         //if(playerCount != PhotonNetwork.CountOfPlayers)
@@ -28,7 +29,10 @@ public class PlayerList : MonoBehaviourPunCallbacks
 
     void CleanList()
     {
-
+        for (var i = playerscontent.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(playerscontent.transform.GetChild(i));
+        }
     }
     IEnumerator LoadPlayer()
     {
@@ -39,9 +43,10 @@ public class PlayerList : MonoBehaviourPunCallbacks
         //Debug.Log(PhotonNetwork.CountOfPlayers);
         //Debug.Log(PhotonNetwork.PlayerList);
         //Debug.Log(PhotonNetwork.PlayerListOthers);
+        CleanList();
         for (int i = 0; i < PhotonNetwork.CountOfPlayers; i++)
         {
-            GameObject edit = Instantiate(playerview, GameObject.Find("playerscontent").transform);
+            GameObject edit = Instantiate(playerview, playerscontent.transform);
             edit.GetComponent<SM_Playerview>();
             edit.name = GameManager.Instance.playerName;
             //Debug.Log("Player nickname: " + GameManager.Instance.playerName);

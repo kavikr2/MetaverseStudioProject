@@ -45,7 +45,7 @@ public class SM_CharacterSelection : MonoBehaviour
                 break;
         }
 
-        GameManager.Instance.characterSelected = characterNo;
+        GameManager.Instance.characterSelected = characterPrefabs[characterNo].name;
         SpawnPlayer();
         CharacterSelectionPanel.SetActive(false);
 
@@ -85,10 +85,11 @@ public class SM_CharacterSelection : MonoBehaviour
             int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
             // int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
-            PhotonNetwork.Instantiate(characterPrefabs[GameManager.Instance.characterSelected].name, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
-            Instantiate(playerDisplayname);
-            canvasCamera.enabled = true;
-            miniMapCam.enabled = true;
+            GameObject pp = PhotonNetwork.Instantiate(GameManager.Instance.characterSelected, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
+            Instantiate(playerDisplayname, transform.position, Quaternion.identity);
+
+            canvasCamera.target = pp.transform; miniMapCam.Player = pp.transform;
+            canvasCamera.enabled = true; miniMapCam.enabled = true;
             //Destroy(CanvasCamera);
             Destroy(gameObject);
         }
