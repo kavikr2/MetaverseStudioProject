@@ -72,7 +72,7 @@ public class SM_StaffCharSelection : MonoBehaviour
             // int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
             GameObject pp = PhotonNetwork.Instantiate(GameManager.Instance.characterSelected, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
-            Instantiate(playerDisplayname);
+            GameObject tp = Instantiate(playerDisplayname); tp.transform.SetParent(pp.transform.Find("NameHolder"), false);
 
             canvasCamera.target = pp.transform; miniMapCam.Player = pp.transform;
             canvasCamera.enabled = true; miniMapCam.enabled = true;

@@ -19,8 +19,6 @@ public class SM_ChatManager : MonoBehaviour, IChatClientListener
     [SerializeField]
     string username;
 
-
-
     [SerializeField] GameObject chatPanel;
     string privateReceiver = "";
     string currentChat;
@@ -50,7 +48,6 @@ public class SM_ChatManager : MonoBehaviour, IChatClientListener
 
     public void OnConnected()
     {
-        Debug.Log("Connected");
         joinChatButton.SetActive(false);
         chatClient.Subscribe(new string[] { "RegionChannel" });
     }

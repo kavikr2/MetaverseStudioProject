@@ -1,7 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -46,7 +45,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = "Lobby Member";
         playerName = "Kavi";
 
-        Debug.Log("Loading pls wait ...");
         StartCoroutine(WaitForConnection());
     }
 
