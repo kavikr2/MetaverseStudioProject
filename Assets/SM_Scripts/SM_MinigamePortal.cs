@@ -10,7 +10,7 @@ public class SM_MinigamePortal : MonoBehaviour
             GameManager.Instance.playerpos = collision.gameObject.transform;
             GameManager.Instance.FirstTime = false;
             GameManager.Instance.SceneChanger(Scenes.SM_Minigame1);
-            Metaverse= false;
+            Metaverse= true;
         }
     }
 

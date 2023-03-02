@@ -19522,7 +19522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1281524858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24536,7 +24536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isClientLogin: 0
-  Load: 0
+  FirstTime: 1
   connectedToServer: 0
   characterSelected: 0
   playerpos: {fileID: 0}
