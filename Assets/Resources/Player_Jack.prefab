@@ -1516,7 +1516,6 @@ GameObject:
   - component: {fileID: 2650981045315838468}
   - component: {fileID: 4299203448081652720}
   - component: {fileID: 8204623745735584238}
-  - component: {fileID: 6748404223746171068}
   m_Layer: 0
   m_Name: Displayname
   m_TagString: Untagged
@@ -1690,7 +1689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe13d5d3f1a50842af13f33b5b7bbe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  view: {fileID: 6748404223746171068}
+  view: {fileID: 4412005651761570866}
   m_Text: {fileID: 2650981045315838468}
 --- !u!114 &8204623745735584238
 MonoBehaviour:
@@ -1705,28 +1704,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: NameHolder
---- !u!114 &6748404223746171068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4511226180005995236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &4554444635080376151
 GameObject:
   m_ObjectHideFlags: 0

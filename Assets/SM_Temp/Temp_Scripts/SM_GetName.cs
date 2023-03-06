@@ -8,13 +8,7 @@ public class SM_GetName : MonoBehaviour
     public TMP_Text m_Text;
     private void Start()
     {
-        view.RPC("GetName", RpcTarget.All);
-    }
-
-    [PunRPC]
-    void GetName()
-    {
-        m_Text.SetText(GameManager.Instance.playerName);
+        m_Text.SetText(view.Owner.NickName); 
     }
 
     void LateUpdate()
