@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 866865048558789185}
   - component: {fileID: 866865048558789184}
   - component: {fileID: 866865048558789187}
-  - component: {fileID: 7460046677694489050}
-  - component: {fileID: 578046112841284486}
+  - component: {fileID: -2474674410900554589}
   m_Layer: 0
   m_Name: Displayname
   m_TagString: Untagged
@@ -202,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: NameHolder
---- !u!114 &7460046677694489050
+--- !u!114 &-2474674410900554589
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,24 +219,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents:
-  - {fileID: 578046112841284486}
+  ObservedComponents: []
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &578046112841284486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 866865048558789186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 1
-  m_UseLocal: 1

@@ -1,7 +1,9 @@
 using Photon.Pun.Demo.Cockpit;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class SM_FeedbackForum : MonoBehaviour
@@ -22,15 +24,16 @@ public class SM_FeedbackForum : MonoBehaviour
 
     IEnumerator SendToForum(string name,string email, string feedback)
     {
-        WWWForm form = new WWWForm();
-        form.AddField("entry.669787835", name);
-        form.AddField("entry.2063508337", email);
-        form.AddField("entry.1541678250", feedback);
-        byte[] rawData = form.data;
-        WWW send = new WWW(ForumURL, rawData);
-        Debug.Log("Thank you for Playing");
+        List<IMultipartFormSection> formData = new List<IMultipartFormSection>
+        {
+            new MultipartFormDataSection("entry.669787835", name),
+            new MultipartFormDataSection("entry.2063508337", email),
+            new MultipartFormDataSection("entry.1541678250", feedback)
+        };
+
+        UnityWebRequest www = UnityWebRequest.Post(ForumURL, formData);
         StartCoroutine(ExitApp());
-        yield return send;
+        yield return www.SendWebRequest();
     }
 
     public void SetInteractablility()
