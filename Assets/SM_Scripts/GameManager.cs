@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         connectedToRoom= true;
     }
+
     public void SetName(string name)
     {
         playerName = name;
