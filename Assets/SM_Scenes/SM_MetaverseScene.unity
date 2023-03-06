@@ -22407,7 +22407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6647143252049391087, guid: 270b50b61b1248744866ea0e8b0d6257, type: 3}
       propertyPath: posZ
-      value: -15
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 6647143252049391087, guid: 270b50b61b1248744866ea0e8b0d6257, type: 3}
       propertyPath: target
