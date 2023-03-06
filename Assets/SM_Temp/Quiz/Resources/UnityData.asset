@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f611d797432e3f846885b2b12fde5f35, type: 3}
+  m_Name: UnityData
+  m_EditorClassIdentifier: 
+  categoryName: Unity
+  questions:
+  - questionInfo: '  What does Vector.Normalize() do?'
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - ' It gives you a vector that is not weird'
+    - It takes a vector and returns the same vector with the opposite direction.
+    - It take a vector and returns the same vector with a magnitude of 1.
+    - "It tells you whether two vectors form a 90\xB0 angle"
+    correctAns: It take a vector and returns the same vector with a magnitude of
+      1.
+  - questionInfo: If a GameObject has a Rigidbody component, it can...
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - be affected by physics
+    - can collide with other objects
+    - not be moved
+    - not be rotated
+    correctAns: be affected by physics
+  - questionInfo: Physic Materials can be added to...
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - Mesh Renderer Components
+    - Rigidbody Components
+    - Collider Components
+    - GameObjects
+    correctAns: Collider Components
+  - questionInfo: Which of the following are always true?
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - 'Colliders can be combined  '
+    - 'Colliders are the same shape as the GameObject their attached to  '
+    - 'Colliders are the same size as the GameObject their attached to  '
+    - 'Colliders make it so that GameObjects bump into each other  '
+    correctAns: 'Colliders can be combined  '
+  - questionInfo: 'If you want to apply Gravity what component would you want to
+      add to a gameobject?  '
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - 'RigidBody(2d or 3d)  '
+    - Image
+    - 'A Custom Script  '
+    - 'Box Collider  '
+    correctAns: 'RigidBody(2d or 3d)  '
+  - questionInfo: 'How would you declare a function that has no return and is public?  '
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - 'function MyFunction()  '
+    - 'public void MyFunction()  '
+    - 'public MyFunction()  '
+    - 'MyFunction:  '
+    correctAns: 'public void MyFunction()  '
+  - questionInfo: 'How many times is the UPDATE function called?  '
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - 'Once every frame  '
+    - 'Whenever I call it in code  '
+    - 'Once every second  '
+    - 'Twice a frame  '
+    correctAns: 'Once every frame  '
+  - questionInfo: Visual Studio is known as an IDE. What does IDE stand for?
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - 'Incredible Duo Expanse  '
+    - 'Interesting Design Experience  '
+    - 'Integrated Development Environment  '
+    - 'Interest Dividend Expenses  '
+    correctAns: 'Integrated Development Environment  '
+  - questionInfo: 'What is the software which allows us to install additional components
+      and open our projects for Unity.  '
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - Unity Hub
+    - 'Visual Studio  '
+    - Windows
+    - 'None of the above.  '
+    correctAns: Unity Hub
+  - questionInfo: 'What programming language are we using for Unity  '
+    questionType: 0
+    questionImage: {fileID: 0}
+    audioClip: {fileID: 0}
+    videoClip: {fileID: 0}
+    options:
+    - 'Java  '
+    - 'C#  '
+    - 'Ruby on Rails  '
+    - 'Python  '
+    correctAns: 'C#  '
