@@ -176,13 +176,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 654252682761388358}
-  - component: {fileID: 654252682761390714}
   - component: {fileID: 654252682761392053}
   - component: {fileID: 3441253488371977570}
   - component: {fileID: 3080137580276372376}
+  - component: {fileID: 5970087982354488245}
   m_Layer: 0
   m_Name: Pointer
-  m_TagString: Untagged
+  m_TagString: Pointer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,20 +204,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &654252682761390714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 654252682761389162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf794c4592aeb0a4fa05ff4c36d96479, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SnapshotNotification: {fileID: 0}
-  myview: {fileID: 3441253488371977570}
 --- !u!65 &654252682761392053
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -270,3 +256,16 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &5970087982354488245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654252682761389162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c0c27d193e4891448d58bb7f5b1a8da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 0}

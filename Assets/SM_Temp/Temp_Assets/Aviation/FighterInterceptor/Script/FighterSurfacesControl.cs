@@ -13,7 +13,6 @@ public class FighterSurfacesControl : MonoBehaviour
     public float rightElevatorSetAngle, leftElevatorSetAngle;
     public bool useMouse;
     public bool turnFlap;
-    private bool f;
     public float turnSpeed;
     private float angleX;
 	// Use this for initialization
@@ -37,13 +36,13 @@ public class FighterSurfacesControl : MonoBehaviour
 	    }
 	    if (!turnFlap)
         {
-            if (Input.GetKeyDown("f")) { turnFlap = true; f = false; }
+            if (Input.GetKeyDown("f")) { turnFlap = true; }
         }
         else
         {
             if (turnFlap)
             {
-                if (Input.GetKeyDown("f")) { turnFlap = false; f = true; }
+                if (Input.GetKeyDown("f")) { turnFlap = false; }
             }
         }
         rightElevator.transform.localRotation = Quaternion.Euler(new Vector3((MRz + MRx) * maxAngle, rightElevatorSetAngle, 0));
