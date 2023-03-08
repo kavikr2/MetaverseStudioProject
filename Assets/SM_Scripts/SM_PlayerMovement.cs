@@ -34,6 +34,7 @@ public class SM_PlayerMovement : MonoBehaviour
                 //SM_SnapshotManager.snapManager.snapCam.CallTakeSnapshot();
                 SM_SnapshotManager.snapManager.SnapPreviewCamObject.SetActive(false);
                 SM_SnapshotManager.snapManager.MainCamera.SetActive(true);
+                SM_SnapshotManager.snapManager.snapCam.CallTakeSnapshot();
             }
 
             //Animations

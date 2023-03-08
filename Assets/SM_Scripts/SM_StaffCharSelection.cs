@@ -68,7 +68,7 @@ public class SM_StaffCharSelection : MonoBehaviour
     {
         if (GameManager.Instance.connectedToServer)
         {
-            PhotonNetwork.Instantiate("VoiceManager", transform.position, transform.rotation);
+            //PhotonNetwork.Instantiate("VoiceManager", transform.position, transform.rotation);
             int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
             // int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 

@@ -15,4 +15,11 @@ public class SM_RoomVote : MonoBehaviour
     {
         likebtn?.SetActive(!hallway);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            likebtn?.SetActive(!hallway);
+        }
+    }
 }
