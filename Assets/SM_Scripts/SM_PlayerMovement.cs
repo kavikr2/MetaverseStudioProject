@@ -1,6 +1,6 @@
-using UnityEngine;
-using Photon.Pun;
 using Michsky.UI.ModernUIPack;
+using Photon.Pun;
+using UnityEngine;
 
 public class SM_PlayerMovement : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class SM_PlayerMovement : MonoBehaviour
 
     NotificationManager SnapshotNotification;
     PhotonView myView;
-    
+
     void Start()
     {
 
@@ -63,17 +63,23 @@ public class SM_PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if (myView.IsMine)
+        {
+
+            MovePlayer();
+        }
     }
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
-        MyInput();
-        SpeedControl();
 
         if (myView.IsMine)
         {
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+
+            MyInput();
+            SpeedControl();
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 //SM_SnapshotManager.snapManager.snapCam.CallTakeSnapshot();
@@ -154,6 +160,7 @@ public class SM_PlayerMovement : MonoBehaviour
 
     public void MyInput()
     {
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
     }
