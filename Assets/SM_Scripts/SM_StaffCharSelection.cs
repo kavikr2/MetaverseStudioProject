@@ -1,3 +1,4 @@
+using Cinemachine;
 using Michsky.UI.ModernUIPack;
 using Photon.Pun;
 using UnityEngine;
@@ -5,8 +6,10 @@ using UnityEngine;
 public class SM_StaffCharSelection : MonoBehaviour
 {
     public HorizontalSelector mySelector;
-    public SM_CamController canvasCamera;
+    public CinemachineFreeLook canvasCamera;
     public MiniCamFollow miniMapCam;
+
+    public SM_ThirdPersonCam _thirdPersonCam;
    
     public GameObject playerDisplayname;
     public SM_MinigameManager minigameManager;
@@ -75,11 +78,18 @@ public class SM_StaffCharSelection : MonoBehaviour
 
             GameObject pp = PhotonNetwork.Instantiate(GameManager.Instance.characterSelected, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
             GameManager.Instance.view = pp.GetComponent<PhotonView>();
-            minigameManager.PlayerCamera = canvasCamera.gameObject; minigameManager.Player = pp;
+            minigameManager.PlayerCamera = canvasCamera.gameObject; 
+            minigameManager.Player = pp;
 
-            canvasCamera.target = pp.transform; miniMapCam.Player = pp.transform;
+            canvasCamera.LookAt = pp.transform; 
+            canvasCamera.Follow = pp.transform; 
+            miniMapCam.Player = pp.transform;
             canvasCamera.enabled = true; miniMapCam.enabled = true;
-
+            _thirdPersonCam.enabled = true;
+            _thirdPersonCam.player = pp.transform;
+            _thirdPersonCam.playerObj = pp.transform.Find("StaffObject");
+            _thirdPersonCam.orientation = pp.transform.Find("Orientation");
+            _thirdPersonCam.rb = pp.GetComponentInChildren<Rigidbody>();
             Destroy(gameObject);
         }
     }

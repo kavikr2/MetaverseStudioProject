@@ -1,3 +1,4 @@
+using Cinemachine;
 using Michsky.UI.ModernUIPack;
 using Photon.Pun;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class SM_CharacterSelection : MonoBehaviour
 {
     public HorizontalSelector mySelector;
-    public SM_CamController canvasCamera;
+    public CinemachineFreeLook canvasCamera;
     public MiniCamFollow miniMapCam;
     public GameObject playerDisplayname;
     public SM_MinigameManager minigameManager;
@@ -85,8 +86,11 @@ public class SM_CharacterSelection : MonoBehaviour
             GameManager.Instance.view = pp.GetComponent<PhotonView>();
             minigameManager.PlayerCamera = canvasCamera.gameObject; minigameManager.Player = pp;
 
-            canvasCamera.target = pp.transform; miniMapCam.Player = pp.transform;
-            canvasCamera.enabled = true; miniMapCam.enabled = true;
+            canvasCamera.LookAt = pp.transform;
+            canvasCamera.Follow = pp.transform;
+            miniMapCam.Player = pp.transform;
+            canvasCamera.enabled = true; 
+            miniMapCam.enabled = true;
             Destroy(gameObject);
         }
     }

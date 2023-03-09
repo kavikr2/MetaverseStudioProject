@@ -10,6 +10,7 @@ TagManager:
   - NameHolder
   - Pointer
   - MiniGameCamera
+  - Walls
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - MiniMapIcon
   - Roof
   - Player
-  - 
+  - Wall
   - 
   - 
   - 
