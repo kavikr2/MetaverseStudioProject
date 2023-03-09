@@ -26243,7 +26243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1184538183
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39230,7 +39230,7 @@ MonoBehaviour:
   minigameManager: {fileID: 1043812527}
   characterPrefabs:
   - {fileID: 1258115541728848339, guid: a6a71f8dae12cc74c9bca50f68681869, type: 3}
-  - {fileID: 958543284257310611}
+  - {fileID: 9183921815362320973, guid: b9aaf80554fa90f48a75ba02855ea684, type: 3}
   spawnPoints:
   - {fileID: 270753885}
   - {fileID: 11739384}
@@ -40262,7 +40262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 1089
+    m_Bits: 1377
   m_IgnoreTag: Player
   m_MinimumDistanceFromTarget: 0.1
   m_AvoidObstacles: 1
@@ -57337,11 +57337,12 @@ MonoBehaviour:
   miniMapCam: {fileID: 2008687512}
   playerDisplayname: {fileID: 866865048558789186, guid: 24783fd7f51049d46a52ab6c1c491b1c, type: 3}
   minigameManager: {fileID: 1043812527}
+  _thirdPersonCam: {fileID: 1997477585}
   characterPrefabs:
   - {fileID: 3946694208883602987, guid: 096e975976e7ddf4e80c92a05d430e8b, type: 3}
   - {fileID: 2844869973986558665, guid: 019773f755790c44490edf6c671f5fdc, type: 3}
   - {fileID: 6958461353045402865, guid: 2ec1053af5d08214084f9e79047f6301, type: 3}
-  - {fileID: 5798667730541139770, guid: 9683ef9416e9c49458859f2bd089e172, type: 3}
+  - {fileID: 1258115541728848339, guid: a6a71f8dae12cc74c9bca50f68681869, type: 3}
   - {fileID: 9183921815362320973, guid: b9aaf80554fa90f48a75ba02855ea684, type: 3}
   spawnPoints:
   - {fileID: 270753885}

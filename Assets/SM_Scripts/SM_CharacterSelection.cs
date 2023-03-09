@@ -11,6 +11,8 @@ public class SM_CharacterSelection : MonoBehaviour
     public GameObject playerDisplayname;
     public SM_MinigameManager minigameManager;
 
+    public SM_ThirdPersonCam _thirdPersonCam;
+
     [Header("Spawner")]
     [SerializeField] private GameObject[] characterPrefabs;
     [SerializeField] private Transform[] spawnPoints;
@@ -80,7 +82,7 @@ public class SM_CharacterSelection : MonoBehaviour
         {
             //PhotonNetwork.Instantiate("VoiceManager", transform.position, transform.rotation);
             int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
-             int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+            int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
             GameObject pp = PhotonNetwork.Instantiate(GameManager.Instance.characterSelected, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
             GameManager.Instance.view = pp.GetComponent<PhotonView>();
@@ -91,6 +93,11 @@ public class SM_CharacterSelection : MonoBehaviour
             miniMapCam.Player = pp.transform;
             canvasCamera.enabled = true; 
             miniMapCam.enabled = true;
+            _thirdPersonCam.enabled = true;
+            _thirdPersonCam.player = pp.transform;
+            _thirdPersonCam.playerObj = pp.transform.Find("PlayerObject");
+            _thirdPersonCam.orientation = pp.transform.Find("Orientation");
+            _thirdPersonCam.rb = pp.GetComponentInChildren<Rigidbody>();
             Destroy(gameObject);
         }
     }

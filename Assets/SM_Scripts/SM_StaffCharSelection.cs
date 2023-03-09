@@ -84,7 +84,8 @@ public class SM_StaffCharSelection : MonoBehaviour
             canvasCamera.LookAt = pp.transform; 
             canvasCamera.Follow = pp.transform; 
             miniMapCam.Player = pp.transform;
-            canvasCamera.enabled = true; miniMapCam.enabled = true;
+            canvasCamera.enabled = true; 
+            miniMapCam.enabled = true;
             _thirdPersonCam.enabled = true;
             _thirdPersonCam.player = pp.transform;
             _thirdPersonCam.playerObj = pp.transform.Find("StaffObject");
