@@ -11,6 +11,7 @@ public class SM_MinigameManager : MonoBehaviour
     [Header("PlayerData")]
     public GameObject Player;
     public GameObject PlayerCamera;
+    public GameObject MainCamera;
     public GameObject MainEventSystem;
     public GameObject MiniMap;
 
@@ -32,7 +33,8 @@ public class SM_MinigameManager : MonoBehaviour
         //if (active)
         //    yield return new WaitForSeconds(5f);
 
-        PlayerCamera.SetActive(active); Player.GetComponent<SM_PlayerMovement>().enabled = active; Player.GetComponent<SM_LazyBool>().lazyBool = active;
+        PlayerCamera.SetActive(active);
+        MainCamera.SetActive(active);  Player.GetComponent<SM_PlayerMovement>().enabled = active; Player.GetComponent<SM_LazyBool>().lazyBool = active;
         yield return null;
     }
 }

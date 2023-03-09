@@ -80,7 +80,7 @@ public class SM_CharacterSelection : MonoBehaviour
         {
             //PhotonNetwork.Instantiate("VoiceManager", transform.position, transform.rotation);
             int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
-            // int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+             int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
             GameObject pp = PhotonNetwork.Instantiate(GameManager.Instance.characterSelected, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
             GameManager.Instance.view = pp.GetComponent<PhotonView>();
