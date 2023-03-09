@@ -34,7 +34,7 @@ public class SM_MinigameManager : MonoBehaviour
         //    yield return new WaitForSeconds(5f);
 
         PlayerCamera.SetActive(active);
-        MainCamera.SetActive(active);  Player.GetComponent<SM_PlayerMovement>().enabled = active; Player.GetComponent<SM_LazyBool>().lazyBool = active;
+        MainCamera.SetActive(active);  Player.GetComponent<SM_PlayerMovement>().enabled = active; Player.GetComponentInChildren<SM_GetName>().enabled = active;
         yield return null;
     }
 }
