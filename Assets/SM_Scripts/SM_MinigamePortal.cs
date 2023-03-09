@@ -2,20 +2,17 @@ using UnityEngine;
 
 public class SM_MinigamePortal : MonoBehaviour
 {
-    public bool Metaverse = false;
-    private void OnCollisionEnter(Collision collision)
+    public SM_MinigameManager manager;
+    public Minigames game;
+
+    public void OnCollisionEnter(Collision collision)
     {
-        if(Metaverse)
-        {
-            GameManager.Instance.playerpos = collision.gameObject.transform;
-            GameManager.Instance.FirstTime = false;
-            GameManager.Instance.SceneChanger(Scenes.SM_Minigame1);
-            Metaverse= true;
-        }
+        manager.EnterMiniGame((int)game);
     }
 
-    public void EnterMetaverseBack()
-    {
-        GameManager.Instance.EnterMetaverse(false);
-    }
+}
+public enum Minigames
+{
+    MathGame,
+    QuizGame
 }

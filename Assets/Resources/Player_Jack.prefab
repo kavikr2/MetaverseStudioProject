@@ -1518,7 +1518,7 @@ GameObject:
   - component: {fileID: 8204623745735584238}
   m_Layer: 0
   m_Name: Displayname
-  m_TagString: Untagged
+  m_TagString: NameHolder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1691,6 +1691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 4412005651761570866}
   m_Text: {fileID: 2650981045315838468}
+  m_LazyBool: {fileID: 3973534083256421248}
 --- !u!114 &8204623745735584238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1747,7 +1748,7 @@ GameObject:
   - component: {fileID: 703375888883661418}
   m_Layer: 0
   m_Name: NameHolder
-  m_TagString: NameHolder
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2681,6 +2682,7 @@ GameObject:
   - component: {fileID: 1780272456924956697}
   - component: {fileID: 4913530498372556584}
   - component: {fileID: 2335010754326552758}
+  - component: {fileID: 3973534083256421248}
   m_Layer: 0
   m_Name: Player_Jack
   m_TagString: Player
@@ -2987,6 +2989,19 @@ MonoBehaviour:
     Max: 1000
     SpeedUpPerc: 5
   restartOnDeviceChange: 1
+--- !u!114 &3973534083256421248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6958461353045402865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7feef22b608944393b84cc5b27ef3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lazyBool: 1
 --- !u!1 &7079215046747435221
 GameObject:
   m_ObjectHideFlags: 0

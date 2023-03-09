@@ -27,16 +27,17 @@ public class GameManager : MonoBehaviourPunCallbacks
     public bool isClientLogin;
     private bool connectedToRoom = false;
 
-    [HideInInspector] public bool FirstTime = true;
-    [HideInInspector] public bool connectedToServer = false;
+    
 
-    [HideInInspector] public string characterSelected;
+    [HideInInspector] public PhotonView view;
     [HideInInspector] public Transform playerpos;
     [HideInInspector] public string playerName;
+    [HideInInspector] public bool firstTime = true;
+
+    [HideInInspector] public string characterSelected;
+    [HideInInspector] public bool connectedToServer = false;
 
     public Scenes thisScene = 0;
-
-    
 
     private void Start()
     {
@@ -84,9 +85,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 yield return null;
             }
-
+            RoomOptions roomOptions = new RoomOptions();
+            PhotonNetwork.JoinOrCreateRoom(scene.ToString(), roomOptions, TypedLobby.Default);
             connectedToRoom = false; StartCoroutine(SpawnPlayer());
-            PhotonNetwork.RejoinRoom(scene.ToString());
         }
         else if(scene == Scenes.SM_Minigame1 || scene == Scenes.SM_Minigame2)
         {
@@ -109,11 +110,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             yield return null;
         }
-            Debug.Log("tried");
-            Vector3 pu = new Vector3(0.39f, 2.97f, 12.2f);
-            GameObject pp = PhotonNetwork.Instantiate(GameManager.Instance.characterSelected, pu, Quaternion.identity);
-        
+        yield return new WaitForSeconds(5f);
+
+        firstTime = true;
+        PhotonNetwork.LoadLevel(thisScene.ToString());
     }
+
     public override void OnConnectedToMaster()
     {
         connectedToServer = true;
@@ -146,16 +148,22 @@ public class GameManager : MonoBehaviourPunCallbacks
             StartCoroutine(WaitForJoinRoom(thisScene.ToString()));
         }
         else {
-            PhotonNetwork.LoadLevel(thisScene.ToString());
             StartCoroutine(PhotonSceneChanger(thisScene));
         }
     }
 
     public void SceneChanger(Scenes scene)
     {
-        thisScene = scene;
-        PhotonNetwork.LoadLevel(thisScene.ToString());
+        if(view != null){
+            if (view.IsMine) {
+                thisScene = scene; PhotonNetwork.LoadLevel(thisScene.ToString());
+                StartCoroutine(PhotonSceneChanger(thisScene));
+            }
+        }
+        else {
+        thisScene = scene; PhotonNetwork.LoadLevel(thisScene.ToString());
         StartCoroutine(PhotonSceneChanger(thisScene));
+        }
     }
 
     public void EnterEnterTest()

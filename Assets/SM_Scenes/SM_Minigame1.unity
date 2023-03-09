@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9582e0fa0dd9fb249bd5a7a805babc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Metaverse: 0
+  Metaverse: 1
 --- !u!1001 &2092542045
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1646,6 +1646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 2510796664964135554}
   m_Text: {fileID: 957565248756215317}
+  m_LazyBool: {fileID: 4649786735449594251}
 --- !u!114 &9160087857103031663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3094,6 +3095,7 @@ GameObject:
   - component: {fileID: 622525441877635652}
   - component: {fileID: 6057330482128744003}
   - component: {fileID: 164478487883116716}
+  - component: {fileID: 4649786735449594251}
   m_Layer: 0
   m_Name: Staff_Louise
   m_TagString: Player
@@ -3399,6 +3401,19 @@ MonoBehaviour:
     Max: 1000
     SpeedUpPerc: 5
   restartOnDeviceChange: 1
+--- !u!114 &4649786735449594251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183921815362320973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7feef22b608944393b84cc5b27ef3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lazyBool: 0
 --- !u!1001 &1641395761811657901
 PrefabInstance:
   m_ObjectHideFlags: 0

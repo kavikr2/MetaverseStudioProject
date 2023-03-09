@@ -8,6 +8,7 @@ public class SM_CharacterSelection : MonoBehaviour
     public SM_CamController canvasCamera;
     public MiniCamFollow miniMapCam;
     public GameObject playerDisplayname;
+    public SM_MinigameManager minigameManager;
 
     [Header("Spawner")]
     [SerializeField] private GameObject[] characterPrefabs;
@@ -81,11 +82,11 @@ public class SM_CharacterSelection : MonoBehaviour
             // int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
             GameObject pp = PhotonNetwork.Instantiate(GameManager.Instance.characterSelected, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
-            //GameObject tp = Instantiate(playerDisplayname); tp.transform.SetParent(pp.transform.Find("NameHolder"), false);
+            GameManager.Instance.view = pp.GetComponent<PhotonView>();
+            minigameManager.PlayerCamera = canvasCamera.gameObject; minigameManager.Player = pp;
 
             canvasCamera.target = pp.transform; miniMapCam.Player = pp.transform;
             canvasCamera.enabled = true; miniMapCam.enabled = true;
-            //Destroy(CanvasCamera);
             Destroy(gameObject);
         }
     }

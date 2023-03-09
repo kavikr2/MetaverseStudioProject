@@ -1487,6 +1487,7 @@ GameObject:
   - component: {fileID: 5757088473672911030}
   - component: {fileID: 5452061596767156853}
   - component: {fileID: 8340715521325946528}
+  - component: {fileID: 5448649385941674399}
   m_Layer: 0
   m_Name: Player_Remy
   m_TagString: Player
@@ -1792,6 +1793,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5448649385941674399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3946694208883602987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7feef22b608944393b84cc5b27ef3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lazyBool: 0
 --- !u!1 &4042880970990111036
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,6 +2787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 7741271048474375926}
   m_Text: {fileID: 879250955008694939}
+  m_LazyBool: {fileID: 5448649385941674399}
 --- !u!114 &8563528143171173562
 MonoBehaviour:
   m_ObjectHideFlags: 0
