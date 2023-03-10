@@ -81,8 +81,8 @@ public class SM_StaffCharSelection : MonoBehaviour
             minigameManager.PlayerCamera = canvasCamera.gameObject; 
             minigameManager.Player = pp;
 
-            canvasCamera.LookAt = pp.transform; 
-            canvasCamera.Follow = pp.transform; 
+            canvasCamera.LookAt = pp.transform.Find("CamTarget"); 
+            canvasCamera.Follow = pp.transform.Find("CamTarget"); 
             miniMapCam.Player = pp.transform;
             canvasCamera.enabled = true; 
             miniMapCam.enabled = true;
