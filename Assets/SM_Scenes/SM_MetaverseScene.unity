@@ -58880,8 +58880,8 @@ MonoBehaviour:
   characterPrefabs:
   - {fileID: 3946694208883602987, guid: 096e975976e7ddf4e80c92a05d430e8b, type: 3}
   - {fileID: 2844869973986558665, guid: 019773f755790c44490edf6c671f5fdc, type: 3}
-  - {fileID: 6958461353045402865, guid: 2ec1053af5d08214084f9e79047f6301, type: 3}
-  - {fileID: 1258115541728848339, guid: a6a71f8dae12cc74c9bca50f68681869, type: 3}
+  - {fileID: 8253780763523534321, guid: 2ec1053af5d08214084f9e79047f6301, type: 3}
+  - {fileID: 6245245801392080017, guid: a6a71f8dae12cc74c9bca50f68681869, type: 3}
   - {fileID: 9183921815362320973, guid: b9aaf80554fa90f48a75ba02855ea684, type: 3}
   spawnPoints:
   - {fileID: 270753885}
