@@ -13708,7 +13708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3666293357420678921, guid: 08725b34857347649a5231d385ab105f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3666293357420678921, guid: 08725b34857347649a5231d385ab105f, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -22227,14 +22227,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981331013}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 14.99, y: -0.32, z: -7.85}
-  m_LocalScale: {x: 4.450258, y: 2.1644466, z: -0.005173942}
+  m_LocalScale: {x: 4.450258, y: 2.1644466, z: 0.006478293}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1832020620}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &981331015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22255,7 +22255,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981331013}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 5e606cdaf947c7f4e9fd5f31195617ab, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: bc6d332909bef9f4ebfad0da2f5c58ae, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -24885,12 +24885,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5865708635373681540, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: a44e56d269ade9f4e9cddc3b8d03246c, type: 3}
+    - target: {fileID: 5865708635373681540, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
       propertyPath: m_DirectAudioMutes.Array.data[0]
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5865708635373681542, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
       propertyPath: m_Name
       value: AviationVid
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865708635373681543, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.018752793
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865708635373681543, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.396
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865708635373681543, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865708635373681543, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865708635373681543, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5865708635646354115, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
       propertyPath: m_Name
@@ -24996,6 +25020,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MartitimeVid
       objectReference: {fileID: 0}
+    - target: {fileID: 5865708636049480910, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 68c601d33d53519429c28464aabfdb14, type: 3}
     - target: {fileID: 5865708636049480910, guid: e7736435f6f3b904099e10b406d0ff18, type: 3}
       propertyPath: m_DirectAudioMutes.Array.data[0]
       value: 1
