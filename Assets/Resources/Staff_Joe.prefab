@@ -1607,7 +1607,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< Updated upstream
   - component: {fileID: 7183655740942236847}
+=======
+  - component: {fileID: 6571544847216053632}
+  - component: {fileID: 996137658036082682}
+  - component: {fileID: 6681204696748780135}
+  - component: {fileID: 6681204696748780136}
+  - component: {fileID: 6681204696748780137}
+  - component: {fileID: 6571544847216053634}
+  - component: {fileID: 6571544847216053633}
+  - component: {fileID: 6571544847216053635}
+  - component: {fileID: 753502692966460116}
+  - component: {fileID: 6264511744529476252}
+  - component: {fileID: 6814317166872687453}
+  - component: {fileID: 7460545712630053}
+  - component: {fileID: 7273167292894552756}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: mixamorig7:LeftHandPinky3
   m_TagString: Untagged
@@ -2094,12 +2110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126494ae2a10a34499272ed97a6c9f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
 --- !u!114 &975798907513231426
+=======
+--- !u!114 &7273167292894552756
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 5297372065250432954}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -2108,6 +2129,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lazyBool: 0
 --- !u!1 &5370962836233072061
+=======
+  m_GameObject: {fileID: 5798667730541139770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab965388a7f30554f82da8da968d2fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+--- !u!1 &5801442173698248367
+>>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
