@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 namespace Michsky.UI.ModernUIPack
 {
@@ -16,7 +17,8 @@ namespace Michsky.UI.ModernUIPack
         public enum PlayType
         {
             CLICK,
-            ON_POINTER_ENTER
+            ON_POINTER_ENTER,
+            MadhanMade
         }
 
         void Start()
@@ -28,6 +30,10 @@ namespace Michsky.UI.ModernUIPack
             {
                 eventButton = gameObject.GetComponent<Button>();
                 eventButton.onClick.AddListener(ClickEvent);
+            }
+            if(playType == PlayType.MadhanMade) {
+                eventButton = gameObject.GetComponent<Button>();
+                eventButton.onClick.AddListener(MadhanAnimate);
             }
         }
 
@@ -56,6 +62,20 @@ namespace Michsky.UI.ModernUIPack
         {
             if (playType == PlayType.ON_POINTER_ENTER)
                 iconAnimator.Play("Out");
+        }
+
+        public void MadhanAnimate()
+        {
+            StartCoroutine(HopefullyWork());
+        }
+
+        IEnumerator HopefullyWork()
+        {
+            iconAnimator.Play("In");
+            eventButton.interactable = false;
+            yield return new WaitForSeconds(1);
+            iconAnimator.Play("Out");
+            eventButton.interactable = true;
         }
     }
 }
