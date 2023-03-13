@@ -1,10 +1,11 @@
 using Michsky.UI.ModernUIPack;
 using Photon.Pun;
+using POpusCodec.Enums;
 using UnityEngine;
 
 public class SM_PlayerMovement : MonoBehaviour
 {
-
+    bool isCollideWithPointer = false;
     public float moveSpeed;
     [HideInInspector] public float walkSpeed;
     public Transform orientation;
@@ -80,12 +81,14 @@ public class SM_PlayerMovement : MonoBehaviour
             MyInput();
             SpeedControl();
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && isCollideWithPointer)
             {
+
                 //SM_SnapshotManager.snapManager.snapCam.CallTakeSnapshot();
+                SM_SnapshotManager.snapManager.snapCam.PlaySound();
                 SM_SnapshotManager.snapManager.SnapPreviewCamObject.SetActive(false);
                 SM_SnapshotManager.snapManager.MainCamera.SetActive(true);
-                //SM_SnapshotManager.snapManager.snapCam.CallTakeSnapshot();
+                isCollideWithPointer = false;
             }
 
             //Animations
@@ -117,43 +120,6 @@ public class SM_PlayerMovement : MonoBehaviour
                 animator.SetBool("isFormalBow", false);
             }
 
-
-
-            //Movement
-            //if (speed > 0) { speed -= 0.1f; }
-            //if (speed < 0) { speed += 0.1f; }
-            //if (Input.GetKey(KeyCode.W) && speed < 4)
-            //{
-            //    speed += 0.5f;
-            //}
-            //if (Input.GetKey(KeyCode.S) && speed > -2)
-            //{
-            //    speed -= 0.5f;
-            //}
-
-            //if (Input.GetKey(KeyCode.A)) { transform.Rotate(0, -2, 0); }
-            //if (Input.GetKey(KeyCode.D)) { transform.Rotate(0, 2, 0); }
-
-            //transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
-            //if (Input.GetKey(KeyCode.W))
-            //{
-            //    transform.Translate(Vector3.forward * speed * Time.deltaTime);
-            //}
-            //if (Input.GetKey(KeyCode.S))
-            //{
-            //    transform.Translate(Vector3.back * speed * Time.deltaTime);
-            //}
-            //if (Input.GetKey(KeyCode.A))
-            //{
-            //    transform.Translate(Vector3.left * speed * Time.deltaTime);
-            //}
-            //if (Input.GetKey(KeyCode.D))
-            //{
-            //    transform.Translate(Vector3.right * speed * Time.deltaTime);
-            //}
-
-
         }
 
     }
@@ -181,9 +147,11 @@ public class SM_PlayerMovement : MonoBehaviour
     {
         if (other.CompareTag("Pointer") && myView.IsMine)
         {
+            isCollideWithPointer = true;
             SM_SnapshotManager.snapManager.SnapPreviewCamObject.SetActive(true);
             SM_SnapshotManager.snapManager.MainCamera.SetActive(false);
             SnapshotNotification.OpenNotification();
         }
     }
+   
 }

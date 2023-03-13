@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class SM_SnapshotCamera : MonoBehaviour
 {
+    public AudioSource SnapshotSound;
     //public GameObject snapshotCamPreview;
     PhotonView myView;
     Camera snapCam;
@@ -29,11 +30,11 @@ public class SM_SnapshotCamera : MonoBehaviour
 
     public void CallTakeSnapshot()
     {
-        //if (myView.IsMine)
-        //{
-            snapCam.gameObject.SetActive(true);
-        //}
-
+         snapCam.gameObject.SetActive(true);
+    }
+    public void PlaySound()
+    {
+        SnapshotSound.Play();
     }
 
     void LateUpdate()

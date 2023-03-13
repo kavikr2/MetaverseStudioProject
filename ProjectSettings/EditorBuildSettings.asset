@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/SM_Scenes/SM_MetaverseScene.unity
     guid: 78b088b344eb75d479e1e2bda56d2aa3
-  - enabled: 1
-    path: Assets/SM_Scenes/SM_Minigame1.unity
-    guid: f399ab89ca64fef4e99cc7345db3ea3a
   m_configObjects: {}
