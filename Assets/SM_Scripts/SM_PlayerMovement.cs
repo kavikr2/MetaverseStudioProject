@@ -28,6 +28,7 @@ public class SM_PlayerMovement : MonoBehaviour
     Animator animator;
 
 
+
     //GameObject snapCam;
     //GameObject snapCamPreview;
 
@@ -152,6 +153,8 @@ public class SM_PlayerMovement : MonoBehaviour
             SM_SnapshotManager.snapManager.MainCamera.SetActive(false);
             SnapshotNotification.OpenNotification();
         }
+        
     }
+
    
 }

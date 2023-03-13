@@ -1,13 +1,17 @@
 using Michsky.UI.ModernUIPack;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SM_RoomVote : MonoBehaviour
 {
+
     public GameObject likebtn;
     public Room Room;
     public SM_LeaderBoard leaderBoard;
+    PhotonView myview;
     bool hallway = false; bool inRoom = false;
+
     void Start()
     {
         if(Room == Room.Hallway) { hallway = true; }
@@ -20,8 +24,13 @@ public class SM_RoomVote : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            likebtn?.SetActive(!hallway);
-            if(!hallway) { inRoom = true; }
+            myview = other.GetComponent<PhotonView>();
+            if (myview.IsMine)
+            {
+                likebtn?.SetActive(!hallway);
+                if (!hallway) { inRoom = true; }
+            }
+
         }
     }
     private void OnTriggerExit(Collider other){ inRoom = false; }
