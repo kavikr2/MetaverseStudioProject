@@ -9,7 +9,7 @@ public class SM_MinigamePortal : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        _view = GetComponent<PhotonView>();
+        _view = collision.gameObject.GetComponent<PhotonView>();
         if(_view.IsMine)
             manager.EnterMiniGame((int)game);
     }
