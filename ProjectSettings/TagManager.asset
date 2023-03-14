@@ -11,6 +11,8 @@ TagManager:
   - Pointer
   - MiniGameCamera
   - Walls
+  - SnapSaveNotification
+  - SnapShotNotification
   layers:
   - Default
   - TransparentFX

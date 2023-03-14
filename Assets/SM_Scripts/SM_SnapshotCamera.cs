@@ -55,8 +55,8 @@ public class SM_SnapshotCamera : MonoBehaviour
 
     string SnapshotName()
     {
-        return string.Format("{0}/SM_Data/Snapshots/snap_{1}X{2}_{3}.png",
-           Application.dataPath,
+        return string.Format("{0}/Snapshots/snap_{1}X{2}_{3}.png",
+           Application.streamingAssetsPath,
            resWidth,
            resHeight,
            System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));

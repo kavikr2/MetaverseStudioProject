@@ -1,6 +1,7 @@
 using Michsky.UI.ModernUIPack;
 using Photon.Pun;
 using POpusCodec.Enums;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SM_PlayerMovement : MonoBehaviour
@@ -32,17 +33,19 @@ public class SM_PlayerMovement : MonoBehaviour
     //GameObject snapCam;
     //GameObject snapCamPreview;
 
-    NotificationManager SnapshotNotification;
+    GameObject SnapshotNotification;
+    GameObject SnapSaveNotification;
     PhotonView myView;
 
     void Start()
     {
-
-
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
-        SnapshotNotification = FindObjectOfType<NotificationManager>();
+        SnapshotNotification = GameObject.FindGameObjectWithTag("SnapShotNotification");
+        SnapSaveNotification = GameObject.FindGameObjectWithTag("SnapSaveNotification");
+
+        
         myView = transform.GetComponent<PhotonView>();
         //snapCam = GameObject.FindGameObjectWithTag("SnapshotCam");
         //snapCamPreview = GameObject.FindGameObjectWithTag("SnapshotPreview");
@@ -85,7 +88,8 @@ public class SM_PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && isCollideWithPointer)
             {
 
-                //SM_SnapshotManager.snapManager.snapCam.CallTakeSnapshot();
+                SM_SnapshotManager.snapManager.snapCam.CallTakeSnapshot();
+                SnapSaveNotification.GetComponent<NotificationManager>().OpenNotification();
                 SM_SnapshotManager.snapManager.snapCam.PlaySound();
                 SM_SnapshotManager.snapManager.SnapPreviewCamObject.SetActive(false);
                 SM_SnapshotManager.snapManager.MainCamera.SetActive(true);
@@ -151,7 +155,7 @@ public class SM_PlayerMovement : MonoBehaviour
             isCollideWithPointer = true;
             SM_SnapshotManager.snapManager.SnapPreviewCamObject.SetActive(true);
             SM_SnapshotManager.snapManager.MainCamera.SetActive(false);
-            SnapshotNotification.OpenNotification();
+            SnapshotNotification.GetComponent<NotificationManager>().OpenNotification();
         }
         
     }
