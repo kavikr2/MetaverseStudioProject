@@ -14,116 +14,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categoryName: Unity
   questions:
-  - questionInfo: '  What does Vector.Normalize() do?'
+  - questionInfo: How to create a Cube Object in Unity?
     questionType: 0
     questionImage: {fileID: 0}
     audioClip: {fileID: 0}
     videoClip: {fileID: 0}
     options:
-    - ' It gives you a vector that is not weird'
-    - It takes a vector and returns the same vector with the opposite direction.
-    - It take a vector and returns the same vector with a magnitude of 1.
-    - "It tells you whether two vectors form a 90\xB0 angle"
-    correctAns: It take a vector and returns the same vector with a magnitude of
-      1.
-  - questionInfo: If a GameObject has a Rigidbody component, it can...
+    - ' Right Click in Hierarchy -> 3D Object -> Cube'
+    - Right Click in Assets -> Cube
+    - File -> 3D Cube
+    - Right Click in Scene Window -> Add -> Cube
+    correctAns: Right Click in Hierarchy -> 3D Object -> Cube
+  - questionInfo: ' How to create a material in Unity?'
     questionType: 0
     questionImage: {fileID: 0}
     audioClip: {fileID: 0}
     videoClip: {fileID: 0}
     options:
-    - be affected by physics
-    - can collide with other objects
-    - not be moved
-    - not be rotated
+    - Right click on object -> Add Material
+    - ' Right Click in Assets -> Create -> Material'
+    - Select Object -> File -> Material
+    - Cannot create in Unity
     correctAns: be affected by physics
-  - questionInfo: Physic Materials can be added to...
+  - questionInfo: Where are created objects shown in Unity?
     questionType: 0
     questionImage: {fileID: 0}
     audioClip: {fileID: 0}
     videoClip: {fileID: 0}
     options:
-    - Mesh Renderer Components
-    - Rigidbody Components
-    - Collider Components
-    - GameObjects
-    correctAns: Collider Components
-  - questionInfo: Which of the following are always true?
+    - Assets Panel
+    - Inspector Panel
+    - Hierarchy Panel
+    - Console Panel
+    correctAns: Hierarchy Panel
+  - questionInfo: Can we create two objects in a single project?
     questionType: 0
     questionImage: {fileID: 0}
     audioClip: {fileID: 0}
     videoClip: {fileID: 0}
     options:
-    - 'Colliders can be combined  '
-    - 'Colliders are the same shape as the GameObject their attached to  '
-    - 'Colliders are the same size as the GameObject their attached to  '
-    - 'Colliders make it so that GameObjects bump into each other  '
-    correctAns: 'Colliders can be combined  '
-  - questionInfo: 'If you want to apply Gravity what component would you want to
-      add to a gameobject?  '
+    - Yes
+    - No, not possible
+    - Possible with few changes in project settings
+    - Can be created, but will cause errors
+    correctAns: Yes
+  - questionInfo: How to Rename any Object in Unity?
     questionType: 0
     questionImage: {fileID: 0}
     audioClip: {fileID: 0}
     videoClip: {fileID: 0}
     options:
-    - 'RigidBody(2d or 3d)  '
-    - Image
-    - 'A Custom Script  '
-    - 'Box Collider  '
-    correctAns: 'RigidBody(2d or 3d)  '
-  - questionInfo: 'How would you declare a function that has no return and is public?  '
-    questionType: 0
-    questionImage: {fileID: 0}
-    audioClip: {fileID: 0}
-    videoClip: {fileID: 0}
-    options:
-    - 'function MyFunction()  '
-    - 'public void MyFunction()  '
-    - 'public MyFunction()  '
-    - 'MyFunction:  '
-    correctAns: 'public void MyFunction()  '
-  - questionInfo: 'How many times is the UPDATE function called?  '
-    questionType: 0
-    questionImage: {fileID: 0}
-    audioClip: {fileID: 0}
-    videoClip: {fileID: 0}
-    options:
-    - 'Once every frame  '
-    - 'Whenever I call it in code  '
-    - 'Once every second  '
-    - 'Twice a frame  '
-    correctAns: 'Once every frame  '
-  - questionInfo: Visual Studio is known as an IDE. What does IDE stand for?
-    questionType: 0
-    questionImage: {fileID: 0}
-    audioClip: {fileID: 0}
-    videoClip: {fileID: 0}
-    options:
-    - 'Incredible Duo Expanse  '
-    - 'Interesting Design Experience  '
-    - 'Integrated Development Environment  '
-    - 'Interest Dividend Expenses  '
-    correctAns: 'Integrated Development Environment  '
-  - questionInfo: 'What is the software which allows us to install additional components
-      and open our projects for Unity.  '
-    questionType: 0
-    questionImage: {fileID: 0}
-    audioClip: {fileID: 0}
-    videoClip: {fileID: 0}
-    options:
-    - Unity Hub
-    - 'Visual Studio  '
-    - Windows
-    - 'None of the above.  '
-    correctAns: Unity Hub
-  - questionInfo: 'What programming language are we using for Unity  '
-    questionType: 0
-    questionImage: {fileID: 0}
-    audioClip: {fileID: 0}
-    videoClip: {fileID: 0}
-    options:
-    - 'Java  '
-    - 'C#  '
-    - 'Ruby on Rails  '
-    - 'Python  '
-    correctAns: 'C#  '
+    - Right click on object in Hierarchy -> Rename
+    - Cannot Rename
+    - Right click on object in scene panel -> Rename
+    - File -> Rename Objects
+    correctAns: Right click on object in Hierarchy -> Rename
