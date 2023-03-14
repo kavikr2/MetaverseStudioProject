@@ -14,11 +14,11 @@ public class SM_RoomVote : MonoBehaviour
 
     void Start()
     {
-        if(Room == Room.Hallway) { hallway = true; }
         AnimatedIconHandler animate = likebtn.GetComponent<AnimatedIconHandler>();
         animate.playType = AnimatedIconHandler.PlayType.MadhanMade;
         Button button = likebtn.GetComponent<Button>();
         button.onClick.AddListener(updateLeaderBoard);
+        if (Room == Room.Hallway) { hallway = true; }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -39,6 +39,7 @@ public class SM_RoomVote : MonoBehaviour
     {
         if (inRoom)
         {
+            leaderBoard.EnditPls();
             switch (Room)
             {
                 case Room.Aviation:
