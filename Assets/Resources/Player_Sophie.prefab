@@ -1174,6 +1174,10 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  MaritimeRoomPath: {fileID: 0}
+  AviationRoomPath: {fileID: 0}
+  HealthcareRoomPath: {fileID: 0}
+  EducationRoomPath: {fileID: 0}
 --- !u!54 &8849852901165187607
 Rigidbody:
   m_ObjectHideFlags: 0

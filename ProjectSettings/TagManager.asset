@@ -13,6 +13,16 @@ TagManager:
   - Walls
   - SnapSaveNotification
   - SnapShotNotification
+  - PathFinder
+  - MaritimeRoom
+  - AviationRoom
+  - HealthcareRoom
+  - EducationRoom
+  - MaritimeRoomPath
+  - HealthcareRoomPath
+  - EducationRoomPath
+  - AviationRoomPath
+  - Hallway
   layers:
   - Default
   - TransparentFX

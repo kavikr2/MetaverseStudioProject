@@ -48,7 +48,7 @@ public class SM_StaffCharSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -72,6 +72,7 @@ public class SM_StaffCharSelection : MonoBehaviour
     {
         if (GameManager.Instance.connectedToServer)
         {
+           
             //PhotonNetwork.Instantiate("VoiceManager", transform.position, transform.rotation);
             int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
             int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
@@ -91,7 +92,9 @@ public class SM_StaffCharSelection : MonoBehaviour
             _thirdPersonCam.playerObj = pp.transform.Find("StaffObject");
             _thirdPersonCam.orientation = pp.transform.Find("Orientation");
             _thirdPersonCam.rb = pp.GetComponentInChildren<Rigidbody>();
+
             Destroy(gameObject);
+
         }
     }
 }

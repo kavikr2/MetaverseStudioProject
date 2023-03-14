@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class SM_PlayerMovement : MonoBehaviour
 {
+
     bool isCollideWithPointer = false;
     public float moveSpeed;
     [HideInInspector] public float walkSpeed;
@@ -29,28 +30,40 @@ public class SM_PlayerMovement : MonoBehaviour
     Animator animator;
 
 
-
-    //GameObject snapCam;
-    //GameObject snapCamPreview;
-
     GameObject SnapshotNotification;
     GameObject SnapSaveNotification;
     PhotonView myView;
 
+
+    public GameObject MaritimeRoomPath;
+    public GameObject AviationRoomPath;
+    public GameObject HealthcareRoomPath;
+    public GameObject EducationRoomPath;
+
     void Start()
     {
+        
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        MaritimeRoomPath = GameObject.FindGameObjectWithTag("MaritimeRoomPath");
+        AviationRoomPath = GameObject.FindGameObjectWithTag("AviationRoomPath");
+        HealthcareRoomPath = GameObject.FindGameObjectWithTag("HealthcareRoomPath");
+        EducationRoomPath = GameObject.FindGameObjectWithTag("EducationRoomPath");
+
+        myView = transform.GetComponent<PhotonView>();
+
+        
+
+        animator = GetComponentInChildren<Animator>();
 
         SnapshotNotification = GameObject.FindGameObjectWithTag("SnapShotNotification");
         SnapSaveNotification = GameObject.FindGameObjectWithTag("SnapSaveNotification");
 
-        
-        myView = transform.GetComponent<PhotonView>();
         //snapCam = GameObject.FindGameObjectWithTag("SnapshotCam");
         //snapCamPreview = GameObject.FindGameObjectWithTag("SnapshotPreview");
 
-        animator = GetComponentInChildren<Animator>();
+
     }
     private void MovePlayer()
     {
@@ -77,9 +90,9 @@ public class SM_PlayerMovement : MonoBehaviour
     void Update()
     {
 
-
         if (myView.IsMine)
         {
+            
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
             MyInput();
@@ -150,6 +163,13 @@ public class SM_PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("Hallway") && myView.IsMine)
+        {
+
+            AviationRoomPath.SetActive(false);
+            HealthcareRoomPath.SetActive(false);
+            EducationRoomPath.SetActive(false);
+        }
         if (other.CompareTag("Pointer") && myView.IsMine)
         {
             isCollideWithPointer = true;
@@ -158,7 +178,37 @@ public class SM_PlayerMovement : MonoBehaviour
             SnapshotNotification.GetComponent<NotificationManager>().OpenNotification();
         }
         
+        else if(other.CompareTag("MaritimeRoom") && myView.IsMine)
+        {
+            MaritimeRoomPath.SetActive(false);
+            AviationRoomPath.SetActive(true);
+            HealthcareRoomPath.SetActive(false);
+            EducationRoomPath.SetActive(false);
+        }
+
+        else if (other.CompareTag("AviationRoom") && myView.IsMine)
+        {
+            MaritimeRoomPath.SetActive(false);
+            AviationRoomPath.SetActive(false);
+            HealthcareRoomPath.SetActive(true);
+            EducationRoomPath.SetActive(false);
+        }
+        else if (other.CompareTag("HealthcareRoom") && myView.IsMine)
+        {
+            MaritimeRoomPath.SetActive(false);
+            AviationRoomPath.SetActive(false);
+            HealthcareRoomPath.SetActive(false);
+            EducationRoomPath.SetActive(true);
+        }
+        else if (other.CompareTag("EducationRoom") && myView.IsMine)
+        {
+            MaritimeRoomPath.SetActive(false);
+            AviationRoomPath.SetActive(false);
+            HealthcareRoomPath.SetActive(false);
+            EducationRoomPath.SetActive(false);
+        }
     }
+    
 
    
 }
