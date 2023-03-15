@@ -1,81 +1,111 @@
-    using SimpleJSON;
-    using System.Collections;
-    using System.Collections.Generic;
-    using TMPro;
-    using Unity.VisualScripting;
-    using UnityEngine;
-    using UnityEngine.Networking;
+using Photon.Pun;
+using SimpleJSON;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Networking;
 
-    public class SM_LeaderBoard : MonoBehaviour
+public class SM_LeaderBoard : MonoBehaviour, IPunObservable
+{
+    public int Aviation,
+    Maritime,
+    Healthcare,
+    Education;
+    [HideInInspector] public int myVariable;
+    public TextMeshProUGUI text;
+    [HideInInspector] public PhotonView view;
+    string url = "https://sheets.googleapis.com/v4/spreadsheets/1fPiZE0_L-vgQytUzXH9tw_jOp_zQxYMD6joIIA8Yens/values/Sheet2?key=AIzaSyDcGDo4WpnQFPvbwTxuETtR-jHWlhHLmCE";
+
+    private void Awake() { if (Aviation != 0) { StartCoroutine(GetData()); } }
+    private void OnDisable() { StopCoroutine(GetData()); }
+
+    private void Update()
     {
-        public int Aviation,
-        Maritime,
-        Healthcare,
-        Education;
-        public TextMeshProUGUI text;
-        string url = "https://sheets.googleapis.com/v4/spreadsheets/1fPiZE0_L-vgQytUzXH9tw_jOp_zQxYMD6joIIA8Yens/values/Sheet2?key=AIzaSyDcGDo4WpnQFPvbwTxuETtR-jHWlhHLmCE";
+        text.SetText("Aviation :" + Aviation.ToString() + "<br>" + "Maritime :" + Maritime.ToString() + "<br>" + "Healthcare :" + Healthcare.ToString() + "<br>" + "Education :" + Education.ToString() + "<br>");
+    }
 
-        private void Awake() { StartCoroutine(GetData()); }
-        private void OnDisable() { StopCoroutine(GetData()); UpdateData(); }
+    IEnumerator GetData()
+    {
+        UnityWebRequest request = UnityWebRequest.Get(url);
+        yield return request.SendWebRequest();
 
-        private void Update()
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
         {
-            text.SetText("Aviation :" + Aviation.ToString() + "<br>" + "Maritime :" + Maritime.ToString() + "<br>" + "Healthcare :" + Healthcare.ToString() + "<br>" + "Education :" + Education.ToString() + "<br>");
+            Debug.LogError(request.error);
         }
-
-        IEnumerator GetData()
+        else
         {
-            UnityWebRequest request = UnityWebRequest.Get(url);
-            yield return request.SendWebRequest();
+            string json = request.downloadHandler.text;
+            JSONNode data = JSON.Parse(json);
 
-            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            List<string> columns = new List<string>();
+
+            foreach (JSONNode value in data["values"][0].AsArray)
             {
-                Debug.LogError(request.error);
+                string columnName = value.Value;
+                columns.Add(columnName);
             }
-            else
+
+            List<Dictionary<string, string>> rowsData = new List<Dictionary<string, string>>();
+
+            for (int i = 1; i < data["values"].Count; i++)
             {
-                string json = request.downloadHandler.text;
-                JSONNode data = JSON.Parse(json);
+                JSONNode row = data["values"][i];
+                Dictionary<string, string> rowData = new Dictionary<string, string>();
 
-                List<string> columns = new List<string>();
-
-                foreach (JSONNode value in data["values"][0].AsArray)
+                for (int j = 0; j < row.Count; j++)
                 {
-                    string columnName = value.Value;
-                    columns.Add(columnName);
+                    string columnName = columns[j];
+                    string value = row[j].Value;
+                    rowData[columnName] = value;
                 }
 
-                List<Dictionary<string, string>> rowsData = new List<Dictionary<string, string>>();
-
-                for (int i = 1; i < data["values"].Count; i++)
-                {
-                    JSONNode row = data["values"][i];
-                    Dictionary<string, string> rowData = new Dictionary<string, string>();
-
-                    for (int j = 0; j < row.Count; j++)
-                    {
-                        string columnName = columns[j];
-                        string value = row[j].Value;
-                        rowData[columnName] = value;
-                    }
-
-                    rowsData.Add(rowData);
-                }
-                foreach (Dictionary<string, string> rowData in rowsData)
-                {
-                    Aviation = int.Parse(rowData["Aviation"]);
-                    Maritime = int.Parse(rowData["Maritime"]);
-                    Healthcare = int.Parse(rowData["Healthcare"]);
-                    Education = int.Parse(rowData["Education"]);
-                }
+                rowsData.Add(rowData);
+            }
+            foreach (Dictionary<string, string> rowData in rowsData)
+            {
+                Aviation = int.Parse(rowData["Aviation"]);
+                Maritime = int.Parse(rowData["Maritime"]);
+                Healthcare = int.Parse(rowData["Healthcare"]);
+                Education = int.Parse(rowData["Education"]);
             }
         }
+    }
 
     public void EnditPls()
     {
         StopCoroutine(GetData());
         StopAllCoroutines();
     }
+
+
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(Aviation);
+            stream.SendNext(Maritime);
+            stream.SendNext(Healthcare);
+            stream.SendNext(Education);
+        }
+        else
+        {
+            Aviation = (int)stream.ReceiveNext();
+            Maritime = (int)stream.ReceiveNext();
+            Healthcare = (int)stream.ReceiveNext();
+            Education = (int)stream.ReceiveNext();
+        }
+    }
+
+    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    {
+        // ...
+    }
+
+
+
     public void UpdateData()
     {
         Dictionary<string, string> newRow = new Dictionary<string, string>();

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SM_MinigameManager : MonoBehaviour
@@ -11,6 +10,7 @@ public class SM_MinigameManager : MonoBehaviour
     [Header("PlayerData")]
     public GameObject Player;
     public GameObject PlayerCamera;
+    public GameObject PlayerCanvas;
     public GameObject MainCamera;
     public GameObject MainEventSystem;
     public GameObject MiniMap;
@@ -30,11 +30,9 @@ public class SM_MinigameManager : MonoBehaviour
     IEnumerator SetPlayerData(bool active)
     {
         MainEventSystem.SetActive(active); MiniMap.SetActive(active);
-        //if (active)
-        //    yield return new WaitForSeconds(5f);
 
-        PlayerCamera.SetActive(active);
-        MainCamera.SetActive(active);  Player.GetComponent<SM_PlayerMovement>().enabled = active; Player.GetComponentInChildren<SM_GetName>().enabled = active;
+        PlayerCamera.SetActive(active); PlayerCanvas.SetActive(active); MainCamera.SetActive(active);  
+        Player.GetComponent<SM_PlayerMovement>().enabled = active; Player.GetComponentInChildren<SM_GetName>().enabled = active;
         yield return null;
     }
 }

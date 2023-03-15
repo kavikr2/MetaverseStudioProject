@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
            yield return null;
         }
-
+        PhotonNetwork.LoadLevel(scene.ToString());
         Debug.Log("Joined :" + scene.ToString());
     }
 
@@ -100,7 +100,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 1;
             PhotonNetwork.JoinOrCreateRoom(scene.ToString(), roomOptions, TypedLobby.Default);
-            PhotonNetwork.LoadLevel(scene.ToString());
             StartCoroutine(WaitForJoinRoom(scene.ToString()));
         }
     }
@@ -142,7 +141,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         thisScene = Scenes.SM_MetaverseScene;
 
         if (FirstTime){ 
-            PhotonNetwork.LoadLevel(thisScene.ToString());
             RoomOptions roomOptions = new RoomOptions();
             PhotonNetwork.JoinOrCreateRoom(thisScene.ToString(), roomOptions, TypedLobby.Default);
             StartCoroutine(WaitForJoinRoom(thisScene.ToString()));

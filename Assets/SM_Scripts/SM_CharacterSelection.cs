@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class SM_CharacterSelection : MonoBehaviour
 {
+    [Header("References")]
     public HorizontalSelector mySelector;
     public CinemachineFreeLook canvasCamera;
     public MiniCamFollow miniMapCam;
     public GameObject playerDisplayname;
     public SM_MinigameManager minigameManager;
-
+    public SM_LeaderBoard leaderBoard;
+    public GameObject CharacterSelectionPanel;
     public SM_ThirdPersonCam _thirdPersonCam;
 
     [Header("Spawner")]
@@ -22,7 +24,6 @@ public class SM_CharacterSelection : MonoBehaviour
     public GameObject Character2;
     public GameObject Character3;
 
-    public GameObject CharacterSelectionPanel;
     
     int characterNo;
 
@@ -80,7 +81,6 @@ public class SM_CharacterSelection : MonoBehaviour
     {
         if (GameManager.Instance.connectedToServer)
         {
-            //PhotonNetwork.Instantiate("VoiceManager", transform.position, transform.rotation);
             int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
             int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
@@ -98,6 +98,7 @@ public class SM_CharacterSelection : MonoBehaviour
             _thirdPersonCam.playerObj = pp.transform.Find("PlayerObject");
             _thirdPersonCam.orientation = pp.transform.Find("Orientation");
             _thirdPersonCam.rb = pp.GetComponentInChildren<Rigidbody>();
+            leaderBoard.view = pp.GetComponent <PhotonView>();
             Destroy(gameObject);
         }
     }

@@ -158,7 +158,6 @@ public class SM_ServerManager : MonoBehaviour
         else
         {
             Accounts = JsonUtility.FromJson<AccountTable>(request.downloadHandler.text);
-            
             if(loginUser.text == Accounts.Name && loginPass.text == Accounts.Password)
             {
                 SuccessNotify.OpenNotification();
@@ -199,7 +198,7 @@ public class SM_ServerManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void SceneChanger(bool tt)
+    void SceneChanger(bool tt)
     {
         GameManager.Instance.EnterMetaverse(true);
         GameManager.Instance.isClientLogin = tt;
