@@ -22,6 +22,10 @@ public class SM_FeedbackForum : MonoBehaviour
         StartCoroutine(SendToForum(NameField.text, EmailField.text, FeedbackField.text));
     }
 
+    public void ExitWithoutSubmitting()
+    {
+        StartCoroutine(ExitApp());
+    }
     IEnumerator SendToForum(string name,string email, string feedback)
     {
         List<IMultipartFormSection> formData = new List<IMultipartFormSection>

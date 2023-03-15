@@ -15,6 +15,8 @@ public class SM_CharacterSelection : MonoBehaviour
     public GameObject CharacterSelectionPanel;
     public SM_ThirdPersonCam _thirdPersonCam;
 
+    public NotificationManager WelcomeNotification;
+
     [Header("Spawner")]
     [SerializeField] private GameObject[] characterPrefabs;
     [SerializeField] private Transform[] spawnPoints;
@@ -100,6 +102,7 @@ public class SM_CharacterSelection : MonoBehaviour
             _thirdPersonCam.rb = pp.GetComponentInChildren<Rigidbody>();
             leaderBoard.view = pp.GetComponent <PhotonView>();
             Destroy(gameObject);
+            WelcomeNotification.OpenNotification();
         }
     }
 }

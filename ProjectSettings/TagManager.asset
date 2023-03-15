@@ -23,6 +23,10 @@ TagManager:
   - EducationRoomPath
   - AviationRoomPath
   - Hallway
+  - RoomEnter1
+  - RoomEnter2
+  - RoomEnter3
+  - RoomEnter4
   layers:
   - Default
   - TransparentFX

@@ -40,6 +40,11 @@ public class SM_PlayerMovement : MonoBehaviour
     public GameObject HealthcareRoomPath;
     public GameObject EducationRoomPath;
 
+    public GameObject MaritimeRoomNotification;
+    public GameObject HealthcareRoomNotification;
+    public GameObject AviationRoomNotification;
+    public GameObject EducationRoomNotification;
+
     bool enteredMaritimeRoom = false;
     bool enteredAviationRoom = false;
     bool enteredHealthcareRoom = false;
@@ -55,6 +60,11 @@ public class SM_PlayerMovement : MonoBehaviour
         AviationRoomPath = GameObject.FindGameObjectWithTag("AviationRoomPath");
         HealthcareRoomPath = GameObject.FindGameObjectWithTag("HealthcareRoomPath");
         EducationRoomPath = GameObject.FindGameObjectWithTag("EducationRoomPath");
+
+        MaritimeRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter1");
+        AviationRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter2");
+        HealthcareRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter3");
+        EducationRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter4");
 
         myView = transform.GetComponent<PhotonView>();
 
@@ -193,6 +203,8 @@ public class SM_PlayerMovement : MonoBehaviour
         else if(other.CompareTag("MaritimeRoom") && myView.IsMine)
         {
             enteredMaritimeRoom = true;
+            MaritimeRoomNotification.GetComponent<NotificationManager>().OpenNotification();
+
             MaritimeRoomPath.SetActive(false);
             AviationRoomPath.SetActive(true);
             HealthcareRoomPath.SetActive(false);
@@ -202,6 +214,8 @@ public class SM_PlayerMovement : MonoBehaviour
         else if (other.CompareTag("AviationRoom") && myView.IsMine)
         {
             enteredAviationRoom = true;
+            AviationRoomNotification.GetComponent<NotificationManager>().OpenNotification();
+
             MaritimeRoomPath.SetActive(false);
             AviationRoomPath.SetActive(false);
             HealthcareRoomPath.SetActive(true);
@@ -210,6 +224,8 @@ public class SM_PlayerMovement : MonoBehaviour
         else if (other.CompareTag("HealthcareRoom") && myView.IsMine)
         {
             enteredHealthcareRoom = true;
+            HealthcareRoomNotification.GetComponent<NotificationManager>().OpenNotification();
+
             MaritimeRoomPath.SetActive(false);
             AviationRoomPath.SetActive(false);
             HealthcareRoomPath.SetActive(false);
@@ -218,6 +234,8 @@ public class SM_PlayerMovement : MonoBehaviour
         else if (other.CompareTag("EducationRoom") && myView.IsMine)
         {
             enteredEducationeRoom = true;
+            EducationRoomNotification.GetComponent <NotificationManager>().OpenNotification();
+
             MaritimeRoomPath.SetActive(false);
             AviationRoomPath.SetActive(false);
             HealthcareRoomPath.SetActive(false);

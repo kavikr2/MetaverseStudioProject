@@ -14,6 +14,8 @@ public class SM_StaffCharSelection : MonoBehaviour
     public SM_LeaderBoard leaderBoard;
     public GameObject CharacterSelectionPanelObject;
     public SM_ThirdPersonCam _thirdPersonCam;
+
+    public NotificationManager WelcomeNotification;
    
     [Header("Spawner")]
     [SerializeField] private GameObject[] characterPrefabs;
@@ -92,6 +94,7 @@ public class SM_StaffCharSelection : MonoBehaviour
             leaderBoard.view = pp.GetComponent<PhotonView>();
 
             Destroy(gameObject);
+            WelcomeNotification.OpenNotification();
 
         }
     }
