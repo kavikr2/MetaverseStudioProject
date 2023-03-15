@@ -40,6 +40,11 @@ public class SM_PlayerMovement : MonoBehaviour
     public GameObject HealthcareRoomPath;
     public GameObject EducationRoomPath;
 
+    bool enteredMaritimeRoom = false;
+    bool enteredAviationRoom = false;
+    bool enteredHealthcareRoom = false;
+    bool enteredEducationeRoom = false;
+
     void Start()
     {
         
@@ -138,6 +143,13 @@ public class SM_PlayerMovement : MonoBehaviour
                 animator.SetBool("isFormalBow", false);
             }
 
+            if(enteredAviationRoom && enteredEducationeRoom && enteredHealthcareRoom && enteredMaritimeRoom)
+            {
+                MaritimeRoomPath.SetActive(false);
+                AviationRoomPath.SetActive(false);
+                HealthcareRoomPath.SetActive(false);
+                EducationRoomPath.SetActive(false);
+            }
         }
 
     }
@@ -180,6 +192,7 @@ public class SM_PlayerMovement : MonoBehaviour
         
         else if(other.CompareTag("MaritimeRoom") && myView.IsMine)
         {
+            enteredMaritimeRoom = true;
             MaritimeRoomPath.SetActive(false);
             AviationRoomPath.SetActive(true);
             HealthcareRoomPath.SetActive(false);
@@ -188,6 +201,7 @@ public class SM_PlayerMovement : MonoBehaviour
 
         else if (other.CompareTag("AviationRoom") && myView.IsMine)
         {
+            enteredAviationRoom = true;
             MaritimeRoomPath.SetActive(false);
             AviationRoomPath.SetActive(false);
             HealthcareRoomPath.SetActive(true);
@@ -195,6 +209,7 @@ public class SM_PlayerMovement : MonoBehaviour
         }
         else if (other.CompareTag("HealthcareRoom") && myView.IsMine)
         {
+            enteredHealthcareRoom = true;
             MaritimeRoomPath.SetActive(false);
             AviationRoomPath.SetActive(false);
             HealthcareRoomPath.SetActive(false);
@@ -202,6 +217,7 @@ public class SM_PlayerMovement : MonoBehaviour
         }
         else if (other.CompareTag("EducationRoom") && myView.IsMine)
         {
+            enteredEducationeRoom = true;
             MaritimeRoomPath.SetActive(false);
             AviationRoomPath.SetActive(false);
             HealthcareRoomPath.SetActive(false);
