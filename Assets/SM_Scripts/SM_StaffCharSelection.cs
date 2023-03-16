@@ -5,18 +5,16 @@ using UnityEngine;
 
 public class SM_StaffCharSelection : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Public References")]
     public HorizontalSelector mySelector;
     public CinemachineFreeLook canvasCamera;
     public MiniCamFollow miniMapCam;
     public GameObject playerDisplayname;
-    public SM_MinigameManager minigameManager;
-    public SM_LeaderBoard leaderBoard;
-    public GameObject CharacterSelectionPanelObject;
     public SM_ThirdPersonCam _thirdPersonCam;
-
+    public SM_MinigameManager minigameManager;
     public NotificationManager WelcomeNotification;
-   
+    public GameObject CharacterSelectionPanelObject;
+
     [Header("Spawner")]
     [SerializeField] private GameObject[] characterPrefabs;
     [SerializeField] private Transform[] spawnPoints;
@@ -24,6 +22,7 @@ public class SM_StaffCharSelection : MonoBehaviour
     [Header("UI")]
     public GameObject StaffChar1Object;
     public GameObject StaffChar2Object;
+
 
     int characterNo;
 
@@ -73,6 +72,7 @@ public class SM_StaffCharSelection : MonoBehaviour
         if (GameManager.Instance.connectedToServer)
         {
            
+            //PhotonNetwork.Instantiate("VoiceManager", transform.position, transform.rotation);
             int randomSpawnPointIndex = Random.Range(0, spawnPoints.Length);
             int characterPrefabIndex = PhotonNetwork.LocalPlayer.ActorNumber - 1;
 
@@ -91,11 +91,9 @@ public class SM_StaffCharSelection : MonoBehaviour
             _thirdPersonCam.playerObj = pp.transform.Find("StaffObject");
             _thirdPersonCam.orientation = pp.transform.Find("Orientation");
             _thirdPersonCam.rb = pp.GetComponentInChildren<Rigidbody>();
-            leaderBoard.view = pp.GetComponent<PhotonView>();
 
             Destroy(gameObject);
             WelcomeNotification.OpenNotification();
-
         }
     }
 }

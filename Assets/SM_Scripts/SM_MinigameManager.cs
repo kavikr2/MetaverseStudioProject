@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SM_MinigameManager : MonoBehaviour
@@ -31,7 +32,7 @@ public class SM_MinigameManager : MonoBehaviour
     {
         MainEventSystem.SetActive(active); MiniMap.SetActive(active);
 
-        PlayerCamera.SetActive(active); PlayerCanvas.SetActive(active); MainCamera.SetActive(active);  
+        PlayerCamera.SetActive(active); PlayerCanvas.SetActive(active); MainCamera.SetActive(active);
         Player.GetComponent<SM_PlayerMovement>().enabled = active; Player.GetComponentInChildren<SM_GetName>().enabled = active;
         yield return null;
     }

@@ -27,6 +27,7 @@ TagManager:
   - RoomEnter2
   - RoomEnter3
   - RoomEnter4
+  - hall
   layers:
   - Default
   - TransparentFX

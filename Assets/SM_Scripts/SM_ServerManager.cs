@@ -7,6 +7,7 @@ using Michsky.UI.ModernUIPack;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using SimpleJSON;
 
 public class SM_ServerManager : MonoBehaviour
 {
@@ -52,7 +53,8 @@ public class SM_ServerManager : MonoBehaviour
     private Dictionary<int, GameObject> playerListEntries;
 
     AccountTable Accounts;
-    string AccountsURL = "https://drive.google.com/uc?export=download&id=10YFKvBGL4OWGMTzXH2YfdV-c5xpPWK_E";
+    string JsonDepreciatedURL = "https://drive.google.com/uc?export=download&id=10YFKvBGL4OWGMTzXH2YfdV-c5xpPWK_E";
+    string AccountsURL = "https://sheets.googleapis.com/v4/spreadsheets/1fPiZE0_L-vgQytUzXH9tw_jOp_zQxYMD6joIIA8Yens/values/Sheet1?key=AIzaSyDcGDo4WpnQFPvbwTxuETtR-jHWlhHLmCE";
 
     public void Start()
     {
@@ -157,48 +159,72 @@ public class SM_ServerManager : MonoBehaviour
         }
         else
         {
-            Accounts = JsonUtility.FromJson<AccountTable>(request.downloadHandler.text);
-            if(loginUser.text == Accounts.Name && loginPass.text == Accounts.Password)
+            string json = request.downloadHandler.text;
+            JSONNode data = SimpleJSON.JSON.Parse(json);
+            bool bruh = false;
+
+            List<string> columns = new List<string>();
+
+            foreach (JSONNode value in data["values"][0].AsArray)
             {
-                SuccessNotify.OpenNotification();
+                string columnName = value.Value;
+                columns.Add(columnName);
+            }
 
-                if(GameManager.Instance != null)
-                    GameManager.Instance.SetName(Accounts.Name);
+            List<Dictionary<string, string>> rowsData = new List<Dictionary<string, string>>();
 
-                SceneChanger(false);
-            } 
-            else { FailureNotify.OpenNotification(); }
+            for (int i = 1; i < data["values"].Count; i++)
+            {
+                JSONNode row = data["values"][i];
+                Dictionary<string, string> rowData = new Dictionary<string, string>();
+
+                for (int j = 0; j < row.Count; j++)
+                {
+                    string columnName = columns[j];
+                    string value = row[j].Value;
+                    rowData[columnName] = value;
+                }
+
+                rowsData.Add(rowData);
+            }
+
+            foreach (Dictionary<string, string> rowData in rowsData)
+            {
+                string name = rowData["Name"];
+                string email = rowData["Email"];
+                string password = rowData["Password"];
+
+                if (loginUser.text == email && loginPass.text == password)
+                {
+                    SuccessNotify.OpenNotification();
+
+                    if (GameManager.Instance != null)
+                        GameManager.Instance.SetName(name);
+
+                    SceneChanger(false);
+                    bruh = true;
+                }
+            }
+            if (!bruh) { FailureNotify.OpenNotification(); }
         }
     }
 
     public void SetInteractablility()
     {
         nicknameButton.interactable = false;
-        //playButton.interactable = false;
 
         nicknameField.onValueChanged.AddListener(delegate
         {
             nicknameButton.interactable = !string.IsNullOrEmpty(nicknameField.text);
 
         });
-
-        //nicknameField.onValueChanged.AddListener(delegate
-        //{
-        //    playButton.interactable = !string.IsNullOrEmpty(nicknameField.text);
-        //});
     }
 
-    public void SetNickName()
-    {
-        GameManager.Instance.SetName(nicknameField.text);
-    }
+    public void SetNickName() => GameManager.Instance.SetName(nicknameField.text);
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
+    public void Quit() => Application.Quit();
 
-    void SceneChanger(bool tt)
+    public void SceneChanger(bool tt)
     {
         GameManager.Instance.EnterMetaverse(true);
         GameManager.Instance.isClientLogin = tt;

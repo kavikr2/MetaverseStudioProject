@@ -18,6 +18,7 @@ public class SM_RoomVote : MonoBehaviour
         animate.playType = AnimatedIconHandler.PlayType.MadhanMade;
         Button button = likebtn.GetComponent<Button>();
         button.onClick.AddListener(updateLeaderBoard);
+        
         if (Room == Room.Hallway) { hallway = true; }
     }
     private void OnTriggerEnter(Collider other)

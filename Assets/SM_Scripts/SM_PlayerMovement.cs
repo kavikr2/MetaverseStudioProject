@@ -1,11 +1,13 @@
 using Michsky.UI.ModernUIPack;
 using Photon.Pun;
 using POpusCodec.Enums;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class SM_PlayerMovement : MonoBehaviour
 {
+    
 
     bool isCollideWithPointer = false;
     public float moveSpeed;
@@ -50,6 +52,7 @@ public class SM_PlayerMovement : MonoBehaviour
     bool enteredHealthcareRoom = false;
     bool enteredEducationeRoom = false;
 
+
     void Start()
     {
         
@@ -65,6 +68,8 @@ public class SM_PlayerMovement : MonoBehaviour
         AviationRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter2");
         HealthcareRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter3");
         EducationRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter4");
+
+        
 
         myView = transform.GetComponent<PhotonView>();
 
@@ -102,6 +107,9 @@ public class SM_PlayerMovement : MonoBehaviour
             MovePlayer();
         }
     }
+   
+        
+    
     void Update()
     {
 
@@ -153,13 +161,14 @@ public class SM_PlayerMovement : MonoBehaviour
                 animator.SetBool("isFormalBow", false);
             }
 
-            if(enteredAviationRoom && enteredEducationeRoom && enteredHealthcareRoom && enteredMaritimeRoom)
+            if (enteredAviationRoom && enteredEducationeRoom && enteredHealthcareRoom && enteredMaritimeRoom)
             {
                 MaritimeRoomPath.SetActive(false);
                 AviationRoomPath.SetActive(false);
                 HealthcareRoomPath.SetActive(false);
                 EducationRoomPath.SetActive(false);
             }
+
         }
 
     }
@@ -233,8 +242,9 @@ public class SM_PlayerMovement : MonoBehaviour
         }
         else if (other.CompareTag("EducationRoom") && myView.IsMine)
         {
+
             enteredEducationeRoom = true;
-            EducationRoomNotification.GetComponent <NotificationManager>().OpenNotification();
+            EducationRoomNotification.GetComponent<NotificationManager>().OpenNotification();
 
             MaritimeRoomPath.SetActive(false);
             AviationRoomPath.SetActive(false);
