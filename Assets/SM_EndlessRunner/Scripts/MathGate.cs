@@ -28,7 +28,7 @@
         protected override void Build()
         {
             base.Build();
-            //Come up with the math question and random answers
+            
             cameraTrs = Camera.main.transform;
             tabs = GetComponentsInChildren<MathTab>();
             int a = Random(minOperandA, maxOperandA + 1);
@@ -66,7 +66,7 @@
             if (!isDone) return;
             if (!answered)
             {
-                //Make the texts appear if the question is not answered
+                
                 if (Vector3.Distance(trs.position, cameraTrs.position) <= displayDistance) alpha = Mathf.MoveTowards(alpha, 1f, Time.deltaTime * MathPlayer.instance.GetSpeed() * 0.1f);
                 else alpha = Mathf.MoveTowards(alpha, 0f, Time.deltaTime);
             } else
@@ -95,9 +95,9 @@
                 else tabs[i].SetMaterial(wrongMaterial);
             }
             answered = true;
-            //Divide the player's speed by two
+           
             MathPlayer.instance.SetSpeed(MathPlayer.instance.GetSpeed()/ 2f);
-            //If the speed is less or equal to 5, stop the player
+           
             if (MathPlayer.instance.GetSpeed() <= 5f) MathPlayer.instance.SetSpeed(0f);
             if (onAnswer != null) onAnswer();
         }
@@ -109,7 +109,7 @@
                 if (tabs[i].isCorrect) tabs[i].SetMaterial(correctMaterial);
             }
             answered = true;
-            //Increase the speed of the player
+            
             MathPlayer.instance.SetSpeed(MathPlayer.instance.GetSpeed() + speedIncreasePerRightAnswer);
             if (onAnswer != null) onAnswer();
         }

@@ -42,17 +42,17 @@
         {
             if (boost == 0f)
             {
-                //Lane switching logic
+                
                 if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) runner.lane--;
                 if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) runner.lane++;
-                //Capture Boost Input
+                
                 if (Input.GetKeyDown(KeyCode.Space) && canBoost)
                 {
                     boost = 1f;
                     canBoost = false;
                 }
             }
-            //Boosting logic
+            
             if (boost > 0f) runner.followSpeed = speed + boost * speed * 2f;
             else runner.followSpeed = speed;
             Color col = Color.Lerp(regularColor, boostColor, boost);
