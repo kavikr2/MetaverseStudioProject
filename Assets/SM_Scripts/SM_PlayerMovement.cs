@@ -7,46 +7,41 @@ using UnityEngine;
 
 public class SM_PlayerMovement : MonoBehaviour
 {
-    
-
     bool isCollideWithPointer = false;
-    public float moveSpeed;
-    [HideInInspector] public float walkSpeed;
-    public Transform orientation;
 
+    //MovementControls
+    [Header("Movement Related")]
+    public Transform orientation;
     float horizontalInput;
     float verticalInput;
-    public float airMultiplier;
-
     Vector3 moveDirection;
 
     Rigidbody rb;
 
     [Header("Ground Check")]
-    public float playerHeight;
     public LayerMask whatIsGround;
     bool grounded;
 
-
-    float speed;
     Animator animator;
-
-
-    GameObject SnapshotNotification;
-    GameObject SnapSaveNotification;
     PhotonView myView;
 
+    //Snapshots Notifications
+    GameObject SnapshotNotificationObject;
+    GameObject SnapSaveNotificationObject;
 
-    public GameObject MaritimeRoomPath;
-    public GameObject AviationRoomPath;
-    public GameObject HealthcareRoomPath;
-    public GameObject EducationRoomPath;
+    //Arrows Paths Gameobjects
+    GameObject MaritimeRoomPathObject;
+    GameObject AviationRoomPathObject;
+    GameObject HealthcareRoomPathObject;
+    GameObject EducationRoomPathObject;
 
-    public GameObject MaritimeRoomNotification;
-    public GameObject HealthcareRoomNotification;
-    public GameObject AviationRoomNotification;
-    public GameObject EducationRoomNotification;
+    //Notifications on Completing Arrows Paths
+    GameObject MaritimeRoomNotificationObject;
+    GameObject HealthcareRoomNotificationObject;
+    GameObject AviationRoomNotificationObject;
+    GameObject EducationRoomNotificationObject;
 
+    //Check if entered room or not
     bool enteredMaritimeRoom = false;
     bool enteredAviationRoom = false;
     bool enteredHealthcareRoom = false;
@@ -55,34 +50,25 @@ public class SM_PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-
-        MaritimeRoomPath = GameObject.FindGameObjectWithTag("MaritimeRoomPath");
-        AviationRoomPath = GameObject.FindGameObjectWithTag("AviationRoomPath");
-        HealthcareRoomPath = GameObject.FindGameObjectWithTag("HealthcareRoomPath");
-        EducationRoomPath = GameObject.FindGameObjectWithTag("EducationRoomPath");
-
-        MaritimeRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter1");
-        AviationRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter2");
-        HealthcareRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter3");
-        EducationRoomNotification = GameObject.FindGameObjectWithTag("RoomEnter4");
-
-        
-
         myView = transform.GetComponent<PhotonView>();
-
-        
-
         animator = GetComponentInChildren<Animator>();
 
-        SnapshotNotification = GameObject.FindGameObjectWithTag("SnapShotNotification");
-        SnapSaveNotification = GameObject.FindGameObjectWithTag("SnapSaveNotification");
 
-        //snapCam = GameObject.FindGameObjectWithTag("SnapshotCam");
-        //snapCamPreview = GameObject.FindGameObjectWithTag("SnapshotPreview");
+        //Don't want to use find tag.. Will find good alternative for this
+        MaritimeRoomPathObject = GameObject.FindGameObjectWithTag("MaritimeRoomPath");
+        AviationRoomPathObject = GameObject.FindGameObjectWithTag("AviationRoomPath");
+        HealthcareRoomPathObject = GameObject.FindGameObjectWithTag("HealthcareRoomPath");
+        EducationRoomPathObject = GameObject.FindGameObjectWithTag("EducationRoomPath");
 
+        MaritimeRoomNotificationObject = GameObject.FindGameObjectWithTag("RoomEnter1");
+        AviationRoomNotificationObject = GameObject.FindGameObjectWithTag("RoomEnter2");
+        HealthcareRoomNotificationObject = GameObject.FindGameObjectWithTag("RoomEnter3");
+        EducationRoomNotificationObject = GameObject.FindGameObjectWithTag("RoomEnter4");
+
+        SnapshotNotificationObject = GameObject.FindGameObjectWithTag("SnapShotNotification");
+        SnapSaveNotificationObject = GameObject.FindGameObjectWithTag("SnapSaveNotification");
 
     }
     private void MovePlayer()
@@ -92,18 +78,18 @@ public class SM_PlayerMovement : MonoBehaviour
 
         // on ground
         if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * Data.moveSpeed * 10f, ForceMode.Force);
 
         // in air
         else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * Data.moveSpeed * 10f * Data.airMultiplier, ForceMode.Force);
     }
 
     private void FixedUpdate()
     {
+        //Actual player movement happens because of this
         if (myView.IsMine)
         {
-
             MovePlayer();
         }
     }
@@ -112,20 +98,19 @@ public class SM_PlayerMovement : MonoBehaviour
     
     void Update()
     {
-
         if (myView.IsMine)
         {
-            
-            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+            //check ground
+            grounded = Physics.Raycast(transform.position, Vector3.down, Data.playerHeight * 0.5f + 0.3f, whatIsGround);
 
             MyInput();
             SpeedControl();
 
             if (Input.GetKeyDown(KeyCode.Space) && isCollideWithPointer)
             {
-
+                //Snapshot Camera Open, Notification Open, Sound Player, Main Camera Active
                 SM_SnapshotManager.snapManager.snapCam.CallTakeSnapshot();
-                SnapSaveNotification.GetComponent<NotificationManager>().OpenNotification();
+                SnapSaveNotificationObject.GetComponent<NotificationManager>().OpenNotification();
                 SM_SnapshotManager.snapManager.snapCam.PlaySound();
                 SM_SnapshotManager.snapManager.SnapPreviewCamObject.SetActive(false);
                 SM_SnapshotManager.snapManager.MainCamera.SetActive(true);
@@ -133,6 +118,7 @@ public class SM_PlayerMovement : MonoBehaviour
             }
 
             //Animations
+            //Movement Animations
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S))
             {
                 animator.SetBool("isWalking", true);
@@ -142,6 +128,7 @@ public class SM_PlayerMovement : MonoBehaviour
                 animator.SetBool("isWalking", false);
             }
 
+            //Wave Animation
             if (Input.GetKey(KeyCode.C))
             {
                 animator.SetBool("isWaving", true);
@@ -152,6 +139,8 @@ public class SM_PlayerMovement : MonoBehaviour
 
             }
 
+
+            //Formal Bow Animation
             if (Input.GetKey(KeyCode.Z))
             {
                 animator.SetBool("isFormalBow", true);
@@ -161,12 +150,13 @@ public class SM_PlayerMovement : MonoBehaviour
                 animator.SetBool("isFormalBow", false);
             }
 
+            //arrows set to false if entered all rooms
             if (enteredAviationRoom && enteredEducationeRoom && enteredHealthcareRoom && enteredMaritimeRoom)
             {
-                MaritimeRoomPath.SetActive(false);
-                AviationRoomPath.SetActive(false);
-                HealthcareRoomPath.SetActive(false);
-                EducationRoomPath.SetActive(false);
+                MaritimeRoomPathObject.SetActive(false);
+                AviationRoomPathObject.SetActive(false);
+                HealthcareRoomPathObject.SetActive(false);
+                EducationRoomPathObject.SetActive(false);
             }
 
         }
@@ -175,7 +165,6 @@ public class SM_PlayerMovement : MonoBehaviour
 
     public void MyInput()
     {
-
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
     }
@@ -185,71 +174,78 @@ public class SM_PlayerMovement : MonoBehaviour
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         // limit velocity if needed
-        if (flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > Data.moveSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * Data.moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // setting other arrows invisible on spawn
         if (other.CompareTag("Hallway") && myView.IsMine)
         {
-
-            AviationRoomPath.SetActive(false);
-            HealthcareRoomPath.SetActive(false);
-            EducationRoomPath.SetActive(false);
+            AviationRoomPathObject.SetActive(false);
+            HealthcareRoomPathObject.SetActive(false);
+            EducationRoomPathObject.SetActive(false);
         }
+        
+        //Enable Snapshot Camera and disabling Main Camera
         if (other.CompareTag("Pointer") && myView.IsMine)
         {
             isCollideWithPointer = true;
             SM_SnapshotManager.snapManager.SnapPreviewCamObject.SetActive(true);
             SM_SnapshotManager.snapManager.MainCamera.SetActive(false);
-            SnapshotNotification.GetComponent<NotificationManager>().OpenNotification();
+            SnapshotNotificationObject.GetComponent<NotificationManager>().OpenNotification();
         }
         
+        //Arrows set to false for Maritime Room, Open Notification
         else if(other.CompareTag("MaritimeRoom") && myView.IsMine)
         {
             enteredMaritimeRoom = true;
-            MaritimeRoomNotification.GetComponent<NotificationManager>().OpenNotification();
+            MaritimeRoomNotificationObject.GetComponent<NotificationManager>().OpenNotification();
 
-            MaritimeRoomPath.SetActive(false);
-            AviationRoomPath.SetActive(true);
-            HealthcareRoomPath.SetActive(false);
-            EducationRoomPath.SetActive(false);
+            MaritimeRoomPathObject.SetActive(false);
+            AviationRoomPathObject.SetActive(true);
+            HealthcareRoomPathObject.SetActive(false);
+            EducationRoomPathObject.SetActive(false);
         }
 
+        //Arrows set to false for Aviation Room, Open Notification
         else if (other.CompareTag("AviationRoom") && myView.IsMine)
         {
             enteredAviationRoom = true;
-            AviationRoomNotification.GetComponent<NotificationManager>().OpenNotification();
+            AviationRoomNotificationObject.GetComponent<NotificationManager>().OpenNotification();
 
-            MaritimeRoomPath.SetActive(false);
-            AviationRoomPath.SetActive(false);
-            HealthcareRoomPath.SetActive(true);
-            EducationRoomPath.SetActive(false);
+            MaritimeRoomPathObject.SetActive(false);
+            AviationRoomPathObject.SetActive(false);
+            HealthcareRoomPathObject.SetActive(true);
+            EducationRoomPathObject.SetActive(false);
         }
+
+        //Arrows set to false for Healthcare Room, Open Notification
         else if (other.CompareTag("HealthcareRoom") && myView.IsMine)
         {
             enteredHealthcareRoom = true;
-            HealthcareRoomNotification.GetComponent<NotificationManager>().OpenNotification();
+            HealthcareRoomNotificationObject.GetComponent<NotificationManager>().OpenNotification();
 
-            MaritimeRoomPath.SetActive(false);
-            AviationRoomPath.SetActive(false);
-            HealthcareRoomPath.SetActive(false);
-            EducationRoomPath.SetActive(true);
+            MaritimeRoomPathObject.SetActive(false);
+            AviationRoomPathObject.SetActive(false);
+            HealthcareRoomPathObject.SetActive(false);
+            EducationRoomPathObject.SetActive(true);
         }
+
+        //Arrows set to false for Education Room, Open Notification
         else if (other.CompareTag("EducationRoom") && myView.IsMine)
         {
-
             enteredEducationeRoom = true;
-            EducationRoomNotification.GetComponent<NotificationManager>().OpenNotification();
+            EducationRoomNotificationObject.GetComponent<NotificationManager>().OpenNotification();
 
-            MaritimeRoomPath.SetActive(false);
-            AviationRoomPath.SetActive(false);
-            HealthcareRoomPath.SetActive(false);
-            EducationRoomPath.SetActive(false);
+            MaritimeRoomPathObject.SetActive(false);
+            AviationRoomPathObject.SetActive(false);
+            HealthcareRoomPathObject.SetActive(false);
+            EducationRoomPathObject.SetActive(false);
         }
     }
     

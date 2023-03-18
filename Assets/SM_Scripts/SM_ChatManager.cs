@@ -11,7 +11,7 @@ using Unity.VisualScripting;
 public class SM_ChatManager : MonoBehaviour, IChatClientListener
 {
     [SerializeField]
-    GameObject joinChatButton;
+    GameObject joinChatButtonObject;
 
     ChatClient chatClient;
     bool isConnected;
@@ -38,23 +38,23 @@ public class SM_ChatManager : MonoBehaviour, IChatClientListener
     
     public void DebugReturn(DebugLevel level, string message)
     {
-        //throw new System.NotImplementedException();
+        
     }
 
     public void OnChatStateChange(ChatState state)
     {
-        //throw new System.NotImplementedException();
+ 
     }
 
     public void OnConnected()
     {
-        joinChatButton.SetActive(false);
+        joinChatButtonObject.SetActive(false);
         chatClient.Subscribe(new string[] { "RegionChannel" });
     }
 
     public void OnDisconnected()
     {
-        //throw new System.NotImplementedException();
+        
     }
 
     public void OnGetMessages(string channelName, string[] senders, object[] messages)
@@ -70,12 +70,12 @@ public class SM_ChatManager : MonoBehaviour, IChatClientListener
 
     public void OnPrivateMessage(string sender, object message, string channelName)
     {
-        //throw new System.NotImplementedException();
+       
     }
 
     public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
     {
-        //throw new System.NotImplementedException();
+        
     }
 
     public void OnSubscribed(string[] channels, bool[] results)
@@ -85,17 +85,17 @@ public class SM_ChatManager : MonoBehaviour, IChatClientListener
 
     public void OnUnsubscribed(string[] channels)
     {
-        //throw new System.NotImplementedException();
+        
     }
 
     public void OnUserSubscribed(string channel, string user)
     {
-        //throw new System.NotImplementedException();
+        
     }
 
     public void OnUserUnsubscribed(string channel, string user)
     {
-        //throw new System.NotImplementedException();
+        
     }
 
     public void SubmitPublicChatOnClick()

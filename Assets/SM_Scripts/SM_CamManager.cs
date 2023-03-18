@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class SM_CamManager : MonoBehaviour
 {
+#region instance
     public static SM_CamManager instance;
 
     private void Awake()
@@ -18,6 +19,7 @@ public class SM_CamManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+#endregion
 
     public Transform target;
 

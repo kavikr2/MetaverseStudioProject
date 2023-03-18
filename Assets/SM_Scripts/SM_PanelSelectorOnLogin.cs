@@ -5,24 +5,24 @@ using UnityEngine;
 public class SM_PanelSelectorOnLogin : MonoBehaviour
 {
     public SM_CamController canvasCamera;
-    public GameObject ClientCharacterSelectorPanel;
-    public GameObject StaffCharacterSelectorPanel;
+    public GameObject ClientCharacterSelectorPanelObject;
+    public GameObject StaffCharacterSelectorPanelObject;
     // Start is called before the first frame update
     void Start()
     {
-        ClientCharacterSelectorPanel.SetActive(false);
-        StaffCharacterSelectorPanel.SetActive(false);
+        ClientCharacterSelectorPanelObject.SetActive(false);
+        StaffCharacterSelectorPanelObject.SetActive(false);
         if (GameManager.Instance.firstTime)
         {
             if (GameManager.Instance.isClientLogin)
             {
-                ClientCharacterSelectorPanel.SetActive(true);
-                StaffCharacterSelectorPanel.SetActive(false);
+                ClientCharacterSelectorPanelObject.SetActive(true);
+                StaffCharacterSelectorPanelObject.SetActive(false);
             }
             else
             {
-                StaffCharacterSelectorPanel.SetActive(true);
-                ClientCharacterSelectorPanel.SetActive(false);
+                StaffCharacterSelectorPanelObject.SetActive(true);
+                ClientCharacterSelectorPanelObject.SetActive(false);
             }
         }
         else

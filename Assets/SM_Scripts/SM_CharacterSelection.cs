@@ -87,7 +87,7 @@ public class SM_CharacterSelection : MonoBehaviour
 
             GameObject pp = PhotonNetwork.Instantiate(GameManager.Instance.characterSelected, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
             GameManager.Instance.view = pp.GetComponent<PhotonView>();
-            minigameManager.PlayerCamera = canvasCamera.gameObject; minigameManager.Player = pp;
+            minigameManager.PlayerCameraObject = canvasCamera.gameObject; minigameManager.PlayerObject = pp;
 
             canvasCamera.LookAt = pp.transform.Find("CamTarget");
             canvasCamera.Follow = pp.transform.Find("CamTarget");

@@ -394,22 +394,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ea72167923f1a4d943121268e974e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
-  walkSpeed: 0
   orientation: {fileID: 0}
-  airMultiplier: 0
-  playerHeight: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 0
-  MaritimeRoomPath: {fileID: 0}
-  AviationRoomPath: {fileID: 0}
-  HealthcareRoomPath: {fileID: 0}
-  EducationRoomPath: {fileID: 0}
-  MaritimeRoomNotification: {fileID: 0}
-  HealthcareRoomNotification: {fileID: 0}
-  AviationRoomNotification: {fileID: 0}
-  EducationRoomNotification: {fileID: 0}
 --- !u!65 &187825854842505131
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2826,22 +2814,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ea72167923f1a4d943121268e974e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  walkSpeed: 0
   orientation: {fileID: 4438794354090621399}
-  airMultiplier: 1
-  playerHeight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  MaritimeRoomPath: {fileID: 0}
-  AviationRoomPath: {fileID: 0}
-  HealthcareRoomPath: {fileID: 0}
-  EducationRoomPath: {fileID: 0}
-  MaritimeRoomNotification: {fileID: 0}
-  HealthcareRoomNotification: {fileID: 0}
-  AviationRoomNotification: {fileID: 0}
-  EducationRoomNotification: {fileID: 0}
 --- !u!114 &840099859908105284
 MonoBehaviour:
   m_ObjectHideFlags: 0

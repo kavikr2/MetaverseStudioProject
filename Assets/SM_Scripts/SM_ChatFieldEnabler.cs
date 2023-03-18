@@ -19,19 +19,13 @@ public class SM_ChatFieldEnabler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //if (Input.GetKeyDown(KeyCode.V))
-        //{
-        //    no += 1;
-        //}
-
         chatFieldButton.onClick.AddListener(onButtonClick);
 
         if (no % 2 == 0)
         {
             chatFieldEnabled = false;
         }
-        if (no % 2 == 1)
+        else
         {
             chatFieldEnabled = true;
         }
@@ -41,7 +35,7 @@ public class SM_ChatFieldEnabler : MonoBehaviour
         {
             chatFieldObject.SetActive(true);
         }
-        if (!chatFieldEnabled)
+        else
         {
             chatFieldObject.SetActive(false);
         }

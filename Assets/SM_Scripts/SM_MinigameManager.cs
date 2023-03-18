@@ -5,35 +5,35 @@ using UnityEngine;
 public class SM_MinigameManager : MonoBehaviour
 {
     [Header("Minigames")]
-    public GameObject[] Minigame;
-    public GameObject[] MinigameExitBtn;
+    public GameObject[] MinigameObjects;
+    public GameObject[] MinigameExitBtnObjects;
 
     [Header("PlayerData")]
-    public GameObject Player;
-    public GameObject PlayerCamera;
-    public GameObject PlayerCanvas;
-    public GameObject MainCamera;
-    public GameObject MainEventSystem;
-    public GameObject MiniMap;
+    public GameObject PlayerObject;
+    public GameObject PlayerCameraObject;
+    public GameObject PlayerCanvasObject;
+    public GameObject MainCameraObject;
+    public GameObject MainEventSystemObject;
+    public GameObject MiniMapObject;
 
     public void EnterMiniGame(int game)
     {
-        MinigameExitBtn[game].SetActive(true); Minigame[game].SetActive(true);
+        MinigameExitBtnObjects[game].SetActive(true); MinigameObjects[game].SetActive(true);
         StartCoroutine(SetPlayerData(false));
     }
 
     public void EndMinigame(int game)
     {
-        MinigameExitBtn[game].SetActive(false); Minigame[game].SetActive(false);
+        MinigameExitBtnObjects[game].SetActive(false); MinigameObjects[game].SetActive(false);
         StartCoroutine(SetPlayerData(true));
     }
 
     IEnumerator SetPlayerData(bool active)
     {
-        MainEventSystem.SetActive(active); MiniMap.SetActive(active);
+        MainEventSystemObject.SetActive(active); MiniMapObject.SetActive(active);
 
-        PlayerCamera.SetActive(active); PlayerCanvas.SetActive(active); MainCamera.SetActive(active);
-        Player.GetComponent<SM_PlayerMovement>().enabled = active; Player.GetComponentInChildren<SM_GetName>().enabled = active;
+        PlayerCameraObject.SetActive(active); PlayerCanvasObject.SetActive(active); MainCameraObject.SetActive(active);
+        PlayerObject.GetComponent<SM_PlayerMovement>().enabled = active; PlayerObject.GetComponentInChildren<SM_GetName>().enabled = active;
         yield return null;
     }
 }

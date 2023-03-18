@@ -330,6 +330,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ea72167923f1a4d943121268e974e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0
+  walkSpeed: 0
+  orientation: {fileID: 0}
+  airMultiplier: 0
+  playerHeight: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1637703505960852421
 GameObject:
   m_ObjectHideFlags: 0

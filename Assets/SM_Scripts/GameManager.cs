@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     public bool isClientLogin;
     private bool connectedToRoom = false;
 
-    
-
     [HideInInspector] public PhotonView view;
     [HideInInspector] public Transform playerpos;
     [HideInInspector] public string playerName;

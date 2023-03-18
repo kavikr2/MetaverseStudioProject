@@ -43348,17 +43348,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741404618}
   m_CullTransparentMesh: 0
---- !u!114 &1746960671 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6647143252049391087, guid: 270b50b61b1248744866ea0e8b0d6257, type: 3}
-  m_PrefabInstance: {fileID: 1292154612}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630624965}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7b63833c240ccc4c8a2aa12eb7b189f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1746960672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50774,7 +50763,7 @@ GameObject:
   - component: {fileID: 2019484982}
   m_Layer: 0
   m_Name: UICamCharacter
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51237,7 +51226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e096f58e255d551419c5a9612c106901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasCamera: {fileID: 1746960671}
+  canvasCamera: {fileID: 0}
   ClientCharacterSelectorPanel: {fileID: 7737506793699996451}
   StaffCharacterSelectorPanel: {fileID: 1929541551}
 --- !u!4 &2029867680
