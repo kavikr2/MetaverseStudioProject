@@ -48,12 +48,8 @@ public class SM_ServerManager : MonoBehaviour
     public GameObject RoomListContent;
     public GameObject RoomListEntryPrefab;
 
-    private Dictionary<string, RoomInfo> cachedRoomList;
-    private Dictionary<string, GameObject> roomListEntries;
-    private Dictionary<int, GameObject> playerListEntries;
-
     AccountTable Accounts;
-    string JsonDepreciatedURL = "https://drive.google.com/uc?export=download&id=10YFKvBGL4OWGMTzXH2YfdV-c5xpPWK_E";
+    // string JsonDepreciatedURL = "https://drive.google.com/uc?export=download&id=10YFKvBGL4OWGMTzXH2YfdV-c5xpPWK_E";
     string AccountsURL = "https://sheets.googleapis.com/v4/spreadsheets/1fPiZE0_L-vgQytUzXH9tw_jOp_zQxYMD6joIIA8Yens/values/Sheet1?key=AIzaSyDcGDo4WpnQFPvbwTxuETtR-jHWlhHLmCE";
 
     public void Start()

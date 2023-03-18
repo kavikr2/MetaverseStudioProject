@@ -1633,8 +1633,7 @@ GameObject:
   - component: {fileID: 2108792023577449868}
   - component: {fileID: 6591824319061508296}
   - component: {fileID: 957565248756215317}
-  - component: {fileID: 4053940535611628976}
-  - component: {fileID: 9160087857103031663}
+  - component: {fileID: 5764803976653657172}
   m_Layer: 0
   m_Name: Displayname
   m_TagString: Untagged
@@ -1796,7 +1795,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 6591824319061508296}
   m_maskType: 0
---- !u!114 &4053940535611628976
+--- !u!114 &5764803976653657172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1805,24 +1804,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4344065540580892965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fe13d5d3f1a50842af13f33b5b7bbe9, type: 3}
+  m_Script: {fileID: 11500000, guid: 38077a423fc7a5b4383d6f1a75262a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 2510796664964135554}
   m_Text: {fileID: 957565248756215317}
---- !u!114 &9160087857103031663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4344065540580892965}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d14141a99988a5643aa007ca3df46185, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tag: NameHolder
 --- !u!1 &4548483969074678109
 GameObject:
   m_ObjectHideFlags: 0
@@ -3321,11 +3307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ea72167923f1a4d943121268e974e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
-  walkSpeed: 0
   orientation: {fileID: 5516284854078449077}
-  airMultiplier: 1
-  playerHeight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64

@@ -6,7 +6,6 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
 public class SM_ChatManager : MonoBehaviour, IChatClientListener
 {
